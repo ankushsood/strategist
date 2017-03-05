@@ -45,11 +45,11 @@
 			},
 		  })
 
-		.state('home.studentList', {
-			url: '/studets',
+		.state('home.addStudent', {
+			url: '/addStudent',
 			views: {
 			  'detail@home' : {
-				  templateUrl: 'src/admin/student/list.html',
+				  templateUrl: 'src/admin/student/add.html',
 				  controller : 'AddStudentController',
 				  controllerAs: 'addStudentCtrl'
 			  },
@@ -69,4 +69,14 @@
 		
 	}
 
+	
+	angular.module('admin').controller('AdminMenuController', function(){
+			})
+		.controller('AdminHomeController', function(){
+			})
+		.controller('AdminHeaderCotroller', function(){
+		}).controller('AddStudentController', function(){});
+		
+		
+		
 })();

@@ -21,8 +21,8 @@
 
 	<developers>
 		<developer>
-			<name>Philip Washington Sorst</name>
-			<url>https://sorst.net</url>
+			<name>Ankush Sood</name>
+			<url>https://github.com/ankushsood/strategist.git</url>
 		</developer>
 	</developers>
 
@@ -170,6 +170,20 @@
     		<version>${version.org.springframework}</version>
     		<scope>test</scope>
     	</dependency>
+    	
+    	<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.5</version>
+</dependency>
+    	
+    	<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-collections4</artifactId>
+    <version>4.1</version>
+</dependency>
     	
     	<dependency>
     		<groupId>junit</groupId>
