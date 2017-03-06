@@ -1,19 +1,18 @@
 package com.chikara.strategist.service;
 
-import com.chikara.strategist.dao.accesstoken.AccessTokenDao;
-import com.chikara.strategist.dao.user.UserDao;
-import com.chikara.strategist.entity.AccessToken;
-import com.chikara.strategist.entity.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import java.util.UUID;
+
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.UUID;
+import com.chikara.strategist.dao.UserDao;
+import com.chikara.strategist.dao.accesstoken.AccessTokenDao;
+import com.chikara.strategist.entity.AccessToken;
+import com.chikara.strategist.entity.User;
 
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
-public class DaoUserService implements UserService
+public class DaoUserService implements UserService 
 {
     private UserDao userDao;
 
@@ -21,23 +20,21 @@ public class DaoUserService implements UserService
 
     protected DaoUserService()
     {
-        /* Reflection instantiation */
     }
 
-    public DaoUserService(UserDao userDao, AccessTokenDao accessTokenDao)
+    public DaoUserService(AccessTokenDao accessTokenDao)
     {
-        this.userDao = userDao;
+        this.userDao = null;
         this.accessTokenDao = accessTokenDao;
     }
 
-    @Override
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
+    public User loadUserByUsername(String username)
     {
         return this.userDao.loadUserByUsername(username);
     }
 
-    @Override
+    
     @Transactional
     public User findUserByAccessToken(String accessTokenString)
     {
@@ -55,11 +52,10 @@ public class DaoUserService implements UserService
         return accessToken.getUser();
     }
 
-    @Override
     @Transactional
     public AccessToken createAccessToken(User user)
     {
         AccessToken accessToken = new AccessToken(user, UUID.randomUUID().toString());
         return this.accessTokenDao.save(accessToken);
-    }
+    } 
 }

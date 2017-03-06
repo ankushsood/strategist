@@ -31,17 +31,30 @@
 		DATABASE SETUP 
 	 -->
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="username" value="${db.username}" />
-		<property name="password" value="${db.password}" />
-		<property name="driverClassName" value="${db.driver}" />
-		<property name="url" value="${db.url}" />
-	</bean>
-
+     <!-- Hibernate SessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource"><ref bean="dataSource"/></property>
+         <property name="packagesToScan" value="com.chikara.strategist.entity" />
+        <property name="hibernateProperties">
+        <props>
+            <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+            <prop key="hibernate.show_sql">true</prop>
+			<prop key="hibernate.hbm2ddl.auto">update</prop>
+        </props>
+        </property>
+    </bean>
+	
+	
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="persistenceUnitName" value="examplePU" />
+        <property name="persistenceUnitName" value="StrategistPersistenceUnit" />
+        <property name="packagesToScan" >
+            <list>
+                <value>com.chikara.strategist.entity</value>
+            </list>
+        </property>
+
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="generateDdl" value="true" />
@@ -49,30 +62,34 @@
 			</bean>
 		</property>
 	</bean>
-
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean>
-
-	<bean id="blogPostDao" class="com.chikara.strategist.dao.blogpost.JpaBlogPostDao">
-	</bean>
 	
-	<bean id="userDao" class="com.chikara.strategist.dao.user.JpaUserDao">
-	</bean>
+	
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName"><value>com.mysql.jdbc.Driver</value></property>
+        <property name="url"><value>jdbc:mysql://localhost:3306/hms</value></property>
+        <property name="username"><value>root</value></property>
+        <property name="password"><value>root</value></property>
+    </bean>
+    
 
-	<bean id="accessTokenDao"
-		  class="com.chikara.strategist.dao.accesstoken.JpaAccessTokenDao">
-	</bean>
+
+	<!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+	<tx:annotation-driven/>
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory"><ref bean="sessionFactory"/></property>
+    </bean>
+    
+
+	<bean id="userDao" class="com.chikara.strategist.dao.JpaUserDao">
+		</bean>
+		
+	<bean id="accessTokenDao" class="com.chikara.strategist.dao.accesstoken.JpaAccessTokenDao">
+		</bean>
+ 
 
 	<bean id="userService" class="com.chikara.strategist.service.DaoUserService">
-		<constructor-arg ref="userDao"/>
 		<constructor-arg ref="accessTokenDao"/>
-	</bean>
-	
-	<bean id="dataBaseInitializer" class="com.chikara.strategist.dao.DataBaseInitializer" init-method="initDataBase">
-		<constructor-arg ref="userDao" />
-		<constructor-arg ref="blogPostDao"/>
-		<constructor-arg ref="passwordEncoder" />
 	</bean>
 
 	<!--
@@ -102,10 +119,7 @@
 		<security:csrf disabled="true"/>
 		<security:custom-filter ref="authenticationTokenProcessingFilter" position="PRE_AUTH_FILTER" />
 		<security:intercept-url pattern="/rest/user/authenticate" access="permitAll" />
-		<security:intercept-url method="GET" pattern="/rest/blogposts/**" access="hasRole('USER')"/>
-		<security:intercept-url method="PUT" pattern="/rest/blogposts/**" access="hasRole('ADMIN')"/>
-		<security:intercept-url method="POST" pattern="/rest/blogposts/**" access="hasRole('ADMIN')"/>
-		<security:intercept-url method="DELETE" pattern="/rest/blogposts/**" access="hasRole('ADMIN')"/>
+		
 	</security:http>
 
 	<bean id="unauthorizedEntryPoint" class="com.chikara.strategist.rest.UnauthorizedEntryPoint" />

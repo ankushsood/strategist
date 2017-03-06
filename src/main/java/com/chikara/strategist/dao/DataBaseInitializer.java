@@ -1,14 +1,5 @@
 package com.chikara.strategist.dao;
 
-import com.chikara.strategist.dao.blogpost.BlogPostDao;
-import com.chikara.strategist.dao.user.UserDao;
-import com.chikara.strategist.entity.BlogPost;
-import com.chikara.strategist.entity.Role;
-import com.chikara.strategist.entity.User;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Date;
-
 /**
  * Initialize the database with some test entries.
  *
@@ -16,7 +7,7 @@ import java.util.Date;
  */
 public class DataBaseInitializer
 {
-    private BlogPostDao blogPostDao;
+/*    private BlogPostDao blogPostDao;
 
     private UserDao userDao;
 
@@ -24,7 +15,7 @@ public class DataBaseInitializer
 
     protected DataBaseInitializer()
     {
-        /* Default constructor for reflection instantiation */
+        /* Default constructor for reflection instantiation 
     }
 
     public DataBaseInitializer(UserDao userDao, BlogPostDao blogPostDao, PasswordEncoder passwordEncoder)
@@ -53,5 +44,5 @@ public class DataBaseInitializer
             this.blogPostDao.save(blogPost);
             timestamp += 1000 * 60 * 60;
         }
-    }
+    }*/
 }

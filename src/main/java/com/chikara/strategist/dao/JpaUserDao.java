@@ -1,4 +1,4 @@
-package com.chikara.strategist.dao.user;
+package com.chikara.strategist.dao;
 
 import com.chikara.strategist.dao.JpaDao;
 import com.chikara.strategist.entity.User;
