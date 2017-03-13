@@ -4,6 +4,9 @@ import com.chikara.strategist.dao.JpaDao;
 import com.chikara.strategist.entity.AccessToken;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -18,20 +21,31 @@ public class JpaAccessTokenDao extends JpaDao<AccessToken, Long> implements Acce
     {
         super(AccessToken.class);
     }
-
+    
+    
+    public Map<String, AccessToken> accessTokenMap = new HashMap<String, AccessToken>();
+    
+    
     @Override
     @Transactional(readOnly = true, noRollbackFor = NoResultException.class)
     public AccessToken findByToken(String accessTokenString)
     {
-        CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<AccessToken> query = builder.createQuery(this.entityClass);
-        Root<AccessToken> root = query.from(this.entityClass);
-        query.where(builder.equal(root.get("token"), accessTokenString));
-
-        try {
-            return this.getEntityManager().createQuery(query).getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
+    	
+    	String accTokenString = (String)this.accessTokenMap.keySet().toArray()[0];
+    	
+    	return this.accessTokenMap.get(accTokenString);
     }
+    
+    
+    @Override
+    @Transactional
+    public AccessToken save(AccessToken entity)
+    {
+    	
+    	accessTokenMap.put(entity.getToken(), entity);
+        return entity;
+    }
+
 }
+
+

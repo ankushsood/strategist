@@ -83,6 +83,11 @@
 
 	<bean id="userDao" class="com.chikara.strategist.dao.JpaUserDao">
 		</bean>
+	
+	
+	<bean id="studentDao" class="com.chikara.strategist.dao.StudentDAO" >
+		</bean>
+	
 		
 	<bean id="accessTokenDao" class="com.chikara.strategist.dao.accesstoken.JpaAccessTokenDao">
 		</bean>
@@ -119,6 +124,11 @@
 		<security:csrf disabled="true"/>
 		<security:custom-filter ref="authenticationTokenProcessingFilter" position="PRE_AUTH_FILTER" />
 		<security:intercept-url pattern="/rest/user/authenticate" access="permitAll" />
+		<security:intercept-url method="GET" pattern="/rest/students/**" access="hasRole('USER')"/>
+		<security:intercept-url method="GET" pattern="/rest/blogposts/**" access="hasRole('USER')"/>
+		<security:intercept-url method="PUT" pattern="/rest/blogposts/**" access="hasRole('ADMIN')"/>
+		<security:intercept-url method="POST" pattern="/rest/blogposts/**" access="hasRole('ADMIN')"/>
+		<security:intercept-url method="DELETE" pattern="/rest/blogposts/**" access="hasRole('ADMIN')"/>
 		
 	</security:http>
 

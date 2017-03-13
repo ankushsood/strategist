@@ -18,7 +18,7 @@ public class BlogPost implements Entity
 {
     @Id
     @GeneratedValue
-    private Long id;
+    private String id;
 
     @Column
     private Date date;
@@ -31,27 +31,9 @@ public class BlogPost implements Entity
         this.date = new Date();
     }
 
-    @JsonView(JsonViews.Admin.class)
-    public Long getId()
-    {
-        return this.id;
-    }
-
-    @JsonView(JsonViews.User.class)
-    public Date getDate()
-    {
-        return this.date;
-    }
-
     public void setDate(Date date)
     {
         this.date = date;
-    }
-
-    @JsonView(JsonViews.User.class)
-    public String getContent()
-    {
-        return this.content;
     }
 
     public void setContent(String content)
@@ -64,4 +46,10 @@ public class BlogPost implements Entity
     {
         return String.format("BlogPost[%d, %s]", this.id, this.content);
     }
+
+	@Override
+	public String getEntityId() {
+		// TODO Auto-generated method stub
+		return this.id;
+	}
 }

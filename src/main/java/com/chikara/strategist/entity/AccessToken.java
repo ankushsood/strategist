@@ -14,7 +14,7 @@ public class AccessToken implements Entity
 {
     @Id
     @GeneratedValue
-    private Long id;
+    private String id;
 
     @Column(nullable = false)
     private String token;
@@ -43,7 +43,7 @@ public class AccessToken implements Entity
     }
 
     @Override
-    public Long getId()
+    public String getEntityId()
     {
         return this.id;
     }

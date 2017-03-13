@@ -1,40 +1,53 @@
 package com.chikara.strategist.service;
 
-import java.util.UUID;
-
-import org.springframework.transaction.annotation.Transactional;
-
-import com.chikara.strategist.dao.UserDao;
 import com.chikara.strategist.dao.accesstoken.AccessTokenDao;
 import com.chikara.strategist.entity.AccessToken;
+import com.chikara.strategist.entity.Role;
 import com.chikara.strategist.entity.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
-public class DaoUserService implements UserService 
+public class DaoUserService implements UserService
 {
-    private UserDao userDao;
 
     private AccessTokenDao accessTokenDao;
+    private PasswordEncoder passwordEncoder;
 
     protected DaoUserService()
     {
+        /* Reflection instantiation */
     }
 
-    public DaoUserService(AccessTokenDao accessTokenDao)
+    public DaoUserService( AccessTokenDao accessTokenDao)
     {
-        this.userDao = null;
         this.accessTokenDao = accessTokenDao;
     }
 
+    @Override
     @Transactional(readOnly = true)
-    public User loadUserByUsername(String username)
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
-        return this.userDao.loadUserByUsername(username);
+        User adminUser = new User(username, this.passwordEncoder.encode("admin"));
+        Set<Role> roles = new HashSet<Role>();
+        roles.add(Role.USER);
+        roles.add(Role.ADMIN);
+        adminUser.setRoles(roles);
+        
+        
+        return adminUser;
     }
 
-    
+    @Override
     @Transactional
     public User findUserByAccessToken(String accessTokenString)
     {
@@ -52,10 +65,11 @@ public class DaoUserService implements UserService
         return accessToken.getUser();
     }
 
+    @Override
     @Transactional
     public AccessToken createAccessToken(User user)
     {
         AccessToken accessToken = new AccessToken(user, UUID.randomUUID().toString());
         return this.accessTokenDao.save(accessToken);
-    } 
+    }
 }

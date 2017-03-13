@@ -1,5 +1,6 @@
 package com.chikara.strategist.entity;
 
+import java.lang.annotation.Annotation;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,9 +16,10 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+
 @Entity
 @Table(name = "STUDENT")
-public class Student {
+public class Student  implements com.chikara.strategist.entity.Entity {
 	@Id
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
@@ -165,4 +167,9 @@ public class Student {
 		return standard;
 	}
 
+	@Override
+	public String getEntityId() {
+		// TODO Auto-generated method stub
+		return this.id;
+	}
 }

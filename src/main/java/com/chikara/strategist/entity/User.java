@@ -1,5 +1,6 @@
 package com.chikara.strategist.entity;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,9 +13,10 @@ import java.util.Set;
 @javax.persistence.Entity
 public class User implements Entity, UserDetails
 {
-    @Id
-    @GeneratedValue
-    private Long id;
+	@Id
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	private String id;
 
     @Column(unique = true, length = 16, nullable = false)
     private String name;
@@ -23,7 +25,7 @@ public class User implements Entity, UserDetails
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<Role> roles = new HashSet<Role>();
+    private Set<Role> roles = null;
 
     protected User()
     {
@@ -36,12 +38,12 @@ public class User implements Entity, UserDetails
         this.password = passwordHash;
     }
 
-    public Long getId()
+    public String getEntityId()
     {
         return this.id;
     }
 
-    public void setId(Long id)
+    public void setId(String id)
     {
         this.id = id;
     }
@@ -64,11 +66,6 @@ public class User implements Entity, UserDetails
     public void setRoles(Set<Role> roles)
     {
         this.roles = roles;
-    }
-
-    public void addRole(Role role)
-    {
-        this.roles.add(role);
     }
 
     @Override
