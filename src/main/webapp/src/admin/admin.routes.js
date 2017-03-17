@@ -50,8 +50,10 @@
 			views: {
 			  'detail@home' : {
 				  templateUrl: 'src/admin/student/list.html',
-				  controller : 'AddStudentController',
-				  controllerAs: 'addStudentCtrl'
+				  controller : 'StudentListController',
+				  controllerAs: 'stuList',
+				 
+
 			  },
 			},
 		  })

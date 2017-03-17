@@ -1,11 +1,12 @@
 package com.chikara.strategist.dao;
 
+import java.util.Collections;
 import java.util.List;
-
-import javax.persistence.Query;
+import java.util.Map;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,9 @@ public class StudentDAO extends JpaDao<Student, String> implements IStudentDao{
 		super(Student.class);
 	}
 
+	@Autowired
+	private NamedParameterJdbcTemplate sqlTemplate;
+	
 	private HibernateTemplate hibernateTemplate;
 	
 	private String GET_STUDENT_LIST = "SELECT CONCAT(first_name , ' ' ,  last_Name ) AS studentName , Guardian_name, Image_Path, Mobile_number , c.CLASS_CODE, CLASS_SECTION FROM student s "
@@ -28,7 +32,7 @@ public class StudentDAO extends JpaDao<Student, String> implements IStudentDao{
 	}
 	
 	public void getStudentByClassId() {
-		String hql = "select * from Student where class_id";
+		//String hql = "select * from Student where class_id";
 	}
 	
 	
@@ -54,17 +58,12 @@ public class StudentDAO extends JpaDao<Student, String> implements IStudentDao{
 	}
 	
 	@Transactional(readOnly = true)
-	public List<Object> getStudentsList(){
-		Query getStudentsSQL = getEntityManager().createNativeQuery(GET_STUDENT_LIST);
-		List<Object> students = getStudentsSQL.getResultList();
-		
-		System.out.println(students);
-		return students;
+	public List<Map<String, Object>> getStudentsList(){
+		return sqlTemplate.queryForList(GET_STUDENT_LIST, Collections.<String, Object>emptyMap());
 	}
 
 	@Override
 	public Student find(String id) {
-		
 		return null;
 	}
 

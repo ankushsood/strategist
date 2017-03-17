@@ -72,7 +72,9 @@
         <property name="password"><value>root</value></property>
     </bean>
     
-
+	<bean id="sqlTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">  
+		<constructor-arg ref="dataSource"></constructor-arg>  
+	</bean>  
 
 	<!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
 	<tx:annotation-driven/>

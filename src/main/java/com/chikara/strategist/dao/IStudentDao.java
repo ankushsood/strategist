@@ -1,6 +1,7 @@
 package com.chikara.strategist.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.chikara.strategist.entity.Student;
 
@@ -10,5 +11,5 @@ public interface IStudentDao extends Dao<Student, String>
 
     //User findByName(String name);
 	
-	List<Object> getStudentsList();
+	List<Map<String, Object>> getStudentsList();
 }

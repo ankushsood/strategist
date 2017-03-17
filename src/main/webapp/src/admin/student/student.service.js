@@ -1,25 +1,26 @@
 (function() {
 "use strict";
 
-angular.module('admin.student.services', ['ngResource'])
-.factory('addStudentService', AddStudentService)
-.factory('listStudentService', ListStudentService)
+angular.module('admin')
+.factory('ListStudentService', ListStudentService);
 
 
-AddStudentService.$inject=['$resource']
 ListStudentService.$inject=['$resource']
-
+console.log('111111111111111');
 function ListStudentService($resource) {
-	
-	return $resource('rest/students/:action', {},
+	console.log('aaaaaaaaaaaaaaaaaaa');
+	return $resource('rest/students/', {},
 		{
 			listStu: {
-				method: 'POST',
-				params: {'action' : 'students', 'token' : 'asdf'},
+				method: 'GET',
+				params: {'token' : 'asdf'},
+				isArray : true,
 				headers : {'Content-Type': 'application/json'}
 			}
 		}
 	);
+	
+	
 }
 
 

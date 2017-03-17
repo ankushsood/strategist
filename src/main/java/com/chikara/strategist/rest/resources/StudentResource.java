@@ -10,13 +10,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.chikara.strategist.dao.IStudentDao;
-import com.chikara.strategist.dao.StudentDAO;
 
 /**
  * @author Ankush Sood <soodankush@gmail.com>
@@ -42,21 +40,10 @@ public class StudentResource
 
 	@GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Object> getStudents()
+    public List<Map<String, Object>> getStudents()
     {
-/*        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = authentication.getPrincipal();
-        if (!(principal instanceof UserDetails)) {
-            throw new WebApplicationException(401);
-        }
-        UserDetails userDetails = (UserDetails) principal;
-        return new UserTransfer(userDetails.getUsername(), this.createRoleMap(userDetails));*/
-    	
-		List<Object> students = studentDao.getStudentsList();
-		System.out.println("hererererere ------------" + students);
-    	
+		List<Map<String, Object>> students = studentDao.getStudentsList();
     	return students;
-    	
     }
 
    
@@ -66,7 +53,6 @@ public class StudentResource
         for (GrantedAuthority authority : userDetails.getAuthorities()) {
             roles.put(authority.getAuthority(), Boolean.TRUE);
         }
-
         return roles;
     }
 }
