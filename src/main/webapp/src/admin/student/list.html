@@ -1,29 +1,36 @@
-          <div class="page-title">
-            <div class="title_left">
-              <h3>Students</h3>
-            </div>
 
-            <div class="title_right">
-              <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search for...">
-                  <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-                        </span>
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="clearfix"></div>
 
           <div class="row">
             <div class="col-md-12">
               <div class="x_panel">
                 <div class="x_content">
+					<div class="page-title">
+					<div class="title_left">
+					  <h3>Students</h3>
+					</div>
 
+					<div class="title_right">
+						
+					  <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+						<div class="input-group">
+						  <input type="text" class="form-control" placeholder="Search for...">
+						  <span class="input-group-btn">
+									<button class="btn btn-default" type="button">Go!</button>
+								</span>
+						</div>
+					  </div>
+					</div>
+				  </div>
                   <div class="row">
+				  
+					<div class="col-md-12 col-sm-12 col-xs-12" style="text-align:right;">
+						<a type="button" ui-sref="home.editStudent" class="btn btn-primary btn-xs"> 
+						<i class="fa fa-user"></i> Add Student </a>
+					</div>
 
-                    <div class="col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
+
+                    <!--<div class="col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
                       <ul class="pagination pagination-split">
                         <li><a href="#">A</a>
                         </li>
@@ -45,43 +52,34 @@
                         <li><a href="#">Z</a>
                         </li>
                       </ul>
-                    </div>
+                    </div>-->
                     <div class="clearfix"></div>
 
 					
-                    <div  ng-repeat="student in stuList.studentList" class="col-md-4 col-sm-4 col-xs-12 animated fadeInDown">
+                    <div  ng-repeat="student in stuList.studentList" style= 'height:100% !important;' class="col-md-4 col-sm-4 col-xs-12 animated fadeInDown">
                       <div class="well profile_view">
                         <div class="col-sm-12">
-                          <h4 class="brief"><i>{{student.studentName}}</i></h4>
-                          <div class="left col-xs-7">
-                            <h2>Nicole Pearson</h2>
-                            <p><strong>About: </strong> Web Designer / UI. </p>
+                          <!--<h4 class="brief"><i></i></h4>-->
+                          <div class="left col-xs-7" style='height:150px;'>
+                            <h6><strong style='text-transform:uppercase;'>{{student.studentName}}</strong></h6>
+                            <!--<p><strong>Guardian Name </strong> {{student.studentName}} </p>-->
                             <ul class="list-unstyled">
-                              <li><i class="fa fa-phone"></i> Address: </li>
-                              <li><i class="fa fa-phone"></i> Address: </li>
-
+								<li><i class="glyphicon glyphicon-blackboard"></i> {{student.class}}-{{student.section}}</li>
+								<li><i class="fa fa-phone"></i> {{student.contactNo}}</li>
+								<li>
+								<i><img class="icon icons8-Parent-Guardian" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABGdBTUEAALGPC/xhBQAAAstJREFUWEftljtoU1EYx+OrPlDQQUFdtENxUhCr1SpoF+3iIGTQoVSHDJFAEvMaWi/SQURQUBwURMzqoIMiCro5iIIoDhYK1mfUgoit1Ght/f3lJCTpTXra3FsqJPDnnJzzne/7ne+8biDQ+P3vGUin0xsSicQR1HuCH+WBWCy2dFbn5TjOEoJ2Ebwfhm+U4+gX+pxMJm+hbbMCFAwGm+LxuDIxSvAJN9E3hM0m34EI0gLAUDWQkvas70vGrM9agExg9x6Yfb5mB5CHljB57Su/YR7ZwGAzxpIe8xvmkg0My5QDZr+vMATYDcxPC6D7kUhkta8wumOY9QVg8jWO9nfumj22IPhcyP5qw1+3pLrarMZHo9G1AJ2vAjNI31ErRxjp3sK+Bw2g30YDussAarL1EwBmM3LQTZTFUYiMrLB1wDIuJqjDuEnLrjZ0siYQncswaiXoYRyl0DlALkvUT6Hj9B+if91UUNhtRC9rLPdzvX9lfkSndWTgVQZqGb5SjlDm0Z+CM5NiPRPD1L+gJ9R7dfkpsMnavIJz/m8tHV8JpT7ZFGFMKrvp+GRxgqq9VaOMf4GuIdhi28Ph8HLKLQKv4XdENkUYBu9F72YK4jJO++MtushBaMb3Pep69Ssnorbb9K8pwrAHbngIUhpQy7wDoA7897vE0OdJR9l+oUGzcE1/ve34vqtrAj/t5kT+oJR0OtvZq/PLYOoN6DbebPxn9HURcCX7Yj0rsIv2zlQq1am62kKh0CLfYQiWzWQyLaiZeh9QDwDJmdOoiy+nNk7SadkUgbzODIEeE2AVgYLU3+Bfn6vVTqHAXgF88F+WvILB6TAAZ/C305zQ17a+sddmbvUS5qMeP96iBTjW5Wl9KLAfJztXPIUprD3OP0wHxtgO+gIzAxB9U4/NGRhNYG7BkJ47UD2tV/i5XrJnpu1THFN9kjT6GxmozMBf+RWzn9g8Dv8AAAAASUVORK5CYII=" style="height:13px;width:13px;"/></i>
+								{{student.guardianName}}
+								</li>
                             </ul>
                           </div>
                           <div class="right col-xs-5 text-center">
-                            <img src="images/img.jpg" alt="" class="img-circle img-responsive">
+                            <img ng-src="{{student.dp}}" onerror="this.src='images/img.png'" alt="" class="img-circle img-responsive">
                           </div>
                         </div>
-                        <div class="col-xs-12 bottom text-center">
+                        <div class="col-xs-12 bottom text-left">
                           <div class="col-xs-12 col-sm-6 emphasis">
-                            <p class="ratings">
-                              <a>4.0</a>
-                              <a href="#"><span class="fa fa-star"></span></a>
-                              <a href="#"><span class="fa fa-star"></span></a>
-                              <a href="#"><span class="fa fa-star"></span></a>
-                              <a href="#"><span class="fa fa-star"></span></a>
-                              <a href="#"><span class="fa fa-star-o"></span></a>
-                            </p>
-                          </div>
-                          <div class="col-xs-12 col-sm-6 emphasis">
-                            <button type="button" class="btn btn-success btn-xs"> <i class="fa fa-user">
-                                                            </i> <i class="fa fa-comments-o"></i> </button>
-                            <button type="button" class="btn btn-primary btn-xs"> <i class="fa fa-user">
-                                                            </i> View Profile </button>
+                            <a ui-sref="home.viewStudentDetails" class="btn btn-primary btn-xs"> <i class="fa fa-user">
+                                                            </i> View Profile </a>
                           </div>
                         </div>
                       </div>

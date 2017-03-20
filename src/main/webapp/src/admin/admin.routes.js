@@ -58,12 +58,21 @@
 			},
 		  })
 		  .state('home.editStudent', {
-		  
 			url: '/editStudent',
 			views: {
 			  'detail@home' : {
 				  templateUrl: 'src/admin/student/add.html',
 				  controller : 'AddStudentController',
+				  controllerAs: 'addStudentCtrl'
+			  },
+			},
+		  })
+		  .state('home.viewStudentDetails', {
+			url: '/profile',
+			views: {
+			  'detail@home' : {
+				  templateUrl: 'src/admin/student/studentProfile.html',
+				  controller : 'ViewStudentDetailsController',
 				  controllerAs: 'addStudentCtrl'
 			  },
 			},

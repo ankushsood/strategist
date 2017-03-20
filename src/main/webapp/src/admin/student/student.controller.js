@@ -3,6 +3,7 @@
 
 	
 	angular.module('admin').controller('StudentListController', StudentListController );
+	angular.module('admin').controller('ViewStudentDetailsController', ViewStudentDetailsController );
 	
 	
 	
@@ -29,7 +30,10 @@
 		
 			
 	}
-		
+	
+	function ViewStudentDetailsController(){
+		console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+	}	
 		
 		
 })();

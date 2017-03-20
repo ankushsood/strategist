@@ -23,7 +23,9 @@ public class StudentDAO extends JpaDao<Student, String> implements IStudentDao{
 	
 	private HibernateTemplate hibernateTemplate;
 	
-	private String GET_STUDENT_LIST = "SELECT CONCAT(first_name , ' ' ,  last_Name ) AS studentName , Guardian_name, Image_Path, Mobile_number , c.CLASS_CODE, CLASS_SECTION FROM student s "
+	private String GET_STUDENT_LIST = "SELECT CONCAT(first_name , ' ' ,  last_Name ) AS studentName , "
+			+ "Guardian_name as guardianName, Image_Path as dp, Mobile_number as contactNo, c.CLASS_CODE as class, "
+			+ "CLASS_SECTION as section FROM student s "
 			+ "JOIN standard c ON(s.standard_id = c.id)";
 	
 	@Autowired
