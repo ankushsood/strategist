@@ -327,6 +327,9 @@ if (typeof NProgress != 'undefined') {
    $(document).ready(function () {
         NProgress.start();
     });
+	 NProgress.done();
+	 
+	 
 /*    $(window).load(function () {
         NProgress.done();
     });

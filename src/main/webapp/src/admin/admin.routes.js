@@ -73,7 +73,7 @@
 			  'detail@home' : {
 				  templateUrl: 'src/admin/student/studentProfile.html',
 				  controller : 'ViewStudentDetailsController',
-				  controllerAs: 'addStudentCtrl'
+				  controllerAs: 'studentCtrl'
 			  },
 			},
 		  })

@@ -7,7 +7,9 @@
 
 	<properties>
 		<version.org.springframework.security>4.0.4.RELEASE</version.org.springframework.security>
-		<version.org.springframework>4.2.5.RELEASE</version.org.springframework>
+		<version.org.springframework>4.3.4.RELEASE</version.org.springframework>
+		<version.org.springframework.data>1.4.1.RELEASE</version.org.springframework.data>
+		
 		<version.com.sun.jersey.contribs>1.19.1</version.com.sun.jersey.contribs>
 		<version.org.hibernate>4.2.21.Final</version.org.hibernate>
 		<org.slf4j.version>1.7.7</org.slf4j.version>
@@ -16,7 +18,7 @@
 		<org.hsqldb.version>2.3.2</org.hsqldb.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<junit.version>4.11</junit.version>
-		<org.eclipse.jetty.jetty-maven-plugin.version>9.1.1.v20140108</org.eclipse.jetty.jetty-maven-plugin.version>
+		<org.eclipse.jetty.jetty-maven-plugin.version>9.2.11.v20150529</org.eclipse.jetty.jetty-maven-plugin.version>
 	</properties>
 
 	<developers>
@@ -45,8 +47,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -140,15 +142,19 @@
 		</dependency>
 
 
-
-
 <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-<dependency>
-    <groupId>org.hibernate</groupId>
+		<dependency>
+    		<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${version.org.hibernate}</version>
-
-</dependency>
+		</dependency>
+		
+		<!-- CASSANDRA dependency -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-cassandra</artifactId>
+			<version>${version.org.springframework.data}</version>
+		</dependency>
 
 
 
@@ -200,11 +206,11 @@
 		</dependency>
 		    	
 		    	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-<dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-    <version>5.1.6</version>
-</dependency>
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>5.1.6</version>
+		</dependency>
 		    	
     	<dependency>
     		<groupId>junit</groupId>
