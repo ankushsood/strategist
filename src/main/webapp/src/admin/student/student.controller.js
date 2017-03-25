@@ -37,6 +37,9 @@
 
 	function ViewStudentDetailsController(ModalService){
 		var _this = this;
+		
+		
+		
 		_this.show = function() {
 			ModalService.showModal({
             templateUrl: 'src/admin/student/addBadge.html',
@@ -45,9 +48,8 @@
 
         }).then(function(modal) {
             modal.element.modal();
-			console.log('THEN-------------');
-            modal.close.then(function(result) {
-				console.log('---------asdfsafdff-------' + result.desc + "-----------" );
+			modal.close.then(function(result) {
+				console.log('---------selected Badge-------' + JSON.stringify(result) + "-----------" );
             });
         });
     };
@@ -57,8 +59,14 @@
 	AddStudentBadge.$inject=['close']
 	function AddStudentBadge( close) {
 		var _this = this;
+
+		
+		_this.badgeList = [{badgeIconUrl:'images/badges/complete-profile-badge.png', badgeTitle:'Complete Profile'},{badgeIconUrl:'images/badges/good-citizen.png', badgeTitle:'Good Citizen'},{badgeIconUrl:'images/badges/good-question.png', badgeTitle:'Good Question'},
+							{badgeIconUrl:'images/badges/hard-worker.png', badgeTitle:'Hard Worker'},{badgeIconUrl:'images/badges/homework-helper.png', badgeTitle:'Homework Helper'},{badgeIconUrl:'images/badges/participant.png', badgeTitle:'Participant'},
+							{badgeIconUrl:'images/badges/perfect-attendance.png', badgeTitle:'Prefect Attendance'},{badgeIconUrl:'images/badges/star-performer.png', badgeTitle:'Star Performer'},{badgeIconUrl:'images/badges/student-month.png', badgeTitle:'Student Of The Month'}];
+		
 		_this.close = function(result) {
-			close(result, 500); // close, but give 500ms for bootstrap to animate
+			close(result, 500);
 		};
 
 	}

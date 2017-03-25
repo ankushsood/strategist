@@ -3845,7 +3845,8 @@ ul.project_files li a i {
 /* *********  media gallery  **************************** */
 
 .thumbnail .image {
-  height: 120px;
+  /*height: 120px;
+  */
   overflow: hidden;
 }
 .caption {
@@ -3856,8 +3857,10 @@ ul.project_files li a i {
   margin-bottom: 5px;
 }
 .thumbnail {
-  height: 190px;
+  height: 100px;
+  width:100px;
   overflow: hidden;
+  margin-bottom: 0;
 }
 .view {
   overflow: hidden;
@@ -5394,4 +5397,20 @@ ul.notifications {
 }
 .copyright-info {
   padding: 8px 0;
+}
+.highlightIcon{
+	border : 0.1em solid #73879C;
+	
+
+}
+.badgelist{
+	padding:2px;
+	text-align:center;
+	
+}
+
+
+.badgelist a{
+	text-decoration: none;
+	
 }
