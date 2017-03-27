@@ -7,11 +7,11 @@
 
 	<properties>
 		<version.org.springframework.security>4.0.4.RELEASE</version.org.springframework.security>
-		<version.org.springframework>4.3.4.RELEASE</version.org.springframework>
-		<version.org.springframework.data>1.4.1.RELEASE</version.org.springframework.data>
+		<version.org.springframework>4.3.7.RELEASE</version.org.springframework>
+		<version.org.springframework.data>1.5.1.RELEASE</version.org.springframework.data>
 		
 		<version.com.sun.jersey.contribs>1.19.1</version.com.sun.jersey.contribs>
-		<version.org.hibernate>4.2.21.Final</version.org.hibernate>
+		<version.org.hibernate>4.3.11.Final</version.org.hibernate>
 		<org.slf4j.version>1.7.7</org.slf4j.version>
 		<javax.servlet-api.version>2.5</javax.servlet-api.version>
 		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -135,14 +135,8 @@
 			<version>${commons-dbcp.version}</version>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${version.org.hibernate}</version>
-		</dependency>
 
-
-<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+	<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
 		<dependency>
     		<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
@@ -218,6 +212,13 @@
     		<version>${junit.version}</version>
     		<scope>test</scope>
     	</dependency>
+    	
+<!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
+<dependency>
+    <groupId>io.netty</groupId>
+    <artifactId>netty-all</artifactId>
+    <version>4.1.9.Final</version>
+</dependency>
 	</dependencies>
 	
 </project>

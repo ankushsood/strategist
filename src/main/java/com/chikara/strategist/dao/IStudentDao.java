@@ -12,4 +12,6 @@ public interface IStudentDao extends Dao<Student, String>
     //User findByName(String name);
 	
 	List<Map<String, Object>> getStudentsList();
+	
+	Student getStudentById(String studentUUID);
 }

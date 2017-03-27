@@ -23,10 +23,12 @@ public class StudentDAO extends JpaDao<Student, String> implements IStudentDao{
 	
 	private HibernateTemplate hibernateTemplate;
 	
-	private String GET_STUDENT_LIST = "SELECT CONCAT(first_name , ' ' ,  last_Name ) AS studentName , "
+	private String GET_STUDENT_LIST = "SELECT s.id, CONCAT(first_name , ' ' ,  last_Name ) AS studentName , "
 			+ "Guardian_name as guardianName, Image_Path as dp, Mobile_number as contactNo, c.CLASS_CODE as class, "
 			+ "CLASS_SECTION as section FROM student s "
 			+ "JOIN standard c ON(s.standard_id = c.id)";
+	
+	
 	
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
@@ -38,10 +40,12 @@ public class StudentDAO extends JpaDao<Student, String> implements IStudentDao{
 	}
 	
 	
-	
-	@SuppressWarnings("unchecked")
-	public List<Student> getStudent() {
-		return (List<Student>) hibernateTemplate.find("from Student");
+	public Student getStudentById(String studentUUID) {
+		/*Map<String, String> studentParams = new HashMap<String, String>();
+		studentParams.put("id", studentUUID);
+		return sqlTemplate.queryForObject("from Student where id = :id", studentParams, Student.class);*/
+		
+		return hibernateTemplate.load(Student.class, studentUUID);
 	}
 	
 	public void deleteStudent(String id){

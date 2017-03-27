@@ -3,34 +3,54 @@ package com.chikara.strategist.nosql.entity;
 import java.util.Date;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Table;
 
 import org.springframework.cassandra.core.Ordering;
 import org.springframework.cassandra.core.PrimaryKeyType;
+import org.springframework.data.cassandra.mapping.Column;
 import org.springframework.data.cassandra.mapping.PrimaryKeyColumn;
+import org.springframework.data.cassandra.mapping.Table;
+
+import com.datastax.driver.core.utils.UUIDs;
 
 
 
-@Table
+@Table (value="studentTimeline")
 public class StudentTimeline {
 	    @PrimaryKeyColumn(
 	      name = "id", 
 	      ordinal = 1, 
 	      type = PrimaryKeyType.CLUSTERED, 
 	      ordering = Ordering.DESCENDING)
-	    private UUID id;
+	    private UUID id = UUIDs.timeBased();
 	    
 		@PrimaryKeyColumn(
 	      name = "studentId", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
 	    private String studentId;
 		
-		@Column (name = "title")
+		@Column (value = "title")
 		private String title;
 	    
-		@Column(name = "description")
+		@Column(value = "description")
 	    private String description;
 	    
+		@Column(value = "badgeString")
+	    private String badgeString;
+		
+		@Column(value = "eventCreatedBy")
+	    private String eventCreatedBy;
+		
+		@Column(value = "eventCreatorProfileUrl")
+	    private String eventCreatorProfileUrl;
+		
+		@Column(value = "eventCreationDateTime")
+		private Date eventCreationDateTime;
+		
+		@Column(value = "eventType")
+		private String eventType;
+	    
+		@Column(value = "eventCreatorImagePath")
+		private String eventCreatorImagePath;
+		
 		public String getStudentId() {
 			return studentId;
 		}
@@ -46,21 +66,6 @@ public class StudentTimeline {
 		public void setDescription(String description) {
 			this.description = description;
 		}
-
-		@Column(name = "eventCreatedBy")
-	    private String eventCreatedBy;
-		
-		@Column(name = "eventCreatorProfileUrl")
-	    private String eventCreatorProfileUrl;
-		
-		@Column(name = "eventCreationDateTime")
-		private Date eventCreationDateTime;
-		
-		@Column(name = "eventType")
-		private String eventType;
-	    
-		@Column(name = "eventCreatorImagePath")
-		private String eventCreatorImagePath;
 
 		public UUID getId() {
 			return id;

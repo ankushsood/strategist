@@ -1,6 +1,5 @@
 package com.chikara.strategist.entity;
 
-import java.lang.annotation.Annotation;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,6 +19,11 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "STUDENT")
 public class Student  implements com.chikara.strategist.entity.Entity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
