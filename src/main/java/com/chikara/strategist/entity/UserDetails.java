@@ -1,14 +1,11 @@
 package com.chikara.strategist.entity;
 
 import java.util.ArrayList;
-
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 
 import com.chikara.strategist.constants.BookType;
 import com.chikara.strategist.constants.Gender;
@@ -60,7 +57,7 @@ numberOfBooks, Standard standard, Faculty faculty){
         return students;
     }
     
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         School school = new School();
         
         Faculty facRam = new Faculty();
@@ -150,7 +147,7 @@ subjectList.add(maths);subjectList.add(english);subjectList.add(accounts);subjec
         
         session.close();
         
-        /*System.out.println("---------Opening new session");
+        //System.out.println("---------Opening new session");
         session = sessionFactory.openSession();
         session.beginTransaction();
         School stn = (School) session.get(School.class, school.getId());
@@ -168,7 +165,7 @@ subjectList.add(maths);subjectList.add(english);subjectList.add(accounts);subjec
         session.close();
         
         System.out.println(stn2.getStandardList().get(0).getClassCode());
-*/        
+        
     }
-
+*/
 }

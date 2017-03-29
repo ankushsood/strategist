@@ -22,6 +22,7 @@ import org.hibernate.annotations.GenericGenerator;
 import com.chikara.strategist.constants.SchoolType;
 import com.chikara.strategist.constants.SubscriptionType;
 import com.chikara.strategist.entity.Standard;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @Table(name="SCHOOL")
@@ -36,8 +37,10 @@ public class School {
 	@Enumerated(EnumType.STRING)
 	@Column(name="TYPE")
 	private SchoolType schoolType;
+	@JsonIgnore
 	@OneToMany(cascade= CascadeType.ALL, mappedBy = "school")
 	private List<Standard> standardList = new ArrayList<Standard>();
+	@JsonIgnore
 	@OneToMany(cascade= CascadeType.ALL, mappedBy = "school")
 	private List<Faculty> facultyList = new ArrayList<Faculty>();
 /*	@OneToMany(cascade= CascadeType.ALL, mappedBy = "school")

@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -28,6 +28,7 @@ public class Subject{
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
 	private List<Book> bookList;
 
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Student> student;
 

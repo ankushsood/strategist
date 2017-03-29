@@ -1,13 +1,14 @@
 package com.chikara.strategist.dao;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.chikara.strategist.entity.Student;
@@ -43,8 +44,8 @@ public class StudentDAO extends JpaDao<Student, String> implements IStudentDao{
 	public Student getStudentById(String studentUUID) {
 		/*Map<String, String> studentParams = new HashMap<String, String>();
 		studentParams.put("id", studentUUID);
-		return sqlTemplate.queryForObject("from Student where id = :id", studentParams, Student.class);*/
-		
+		return sqlTemplate.queryForObject("select * from Student where id = :id", studentParams, Student.class);
+		*/
 		return hibernateTemplate.load(Student.class, studentUUID);
 	}
 	

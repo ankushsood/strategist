@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.chikara.strategist.constants.BookType;
-
+import org.codehaus.jackson.annotate.JsonIgnore;
 @Entity
 @Table(name="SUBJECT_BOOK")
 public class Book {
@@ -26,6 +26,7 @@ public class Book {
 	private String id;
 	@ManyToOne(cascade= CascadeType.ALL)
 	@JoinColumn(name = "SUBJECT_ID")
+	@JsonIgnore
 	private Subject subject;
 	@Enumerated(EnumType.STRING)
 	@Column(name="BOOK_TYPE")

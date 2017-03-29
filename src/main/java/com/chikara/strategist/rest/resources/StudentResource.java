@@ -58,7 +58,7 @@ public class StudentResource
     }
 
    @GET
-   @Path("/{studentUUID}")
+   @Path("/student/{studentUUID}")
    @Produces(MediaType.APPLICATION_JSON)
    public Student getStudent(@PathParam("studentUUID") String studentUUID){
 	   return studentDao.getStudentById(studentUUID);

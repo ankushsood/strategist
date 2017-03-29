@@ -24,6 +24,7 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.chikara.strategist.constants.SubjectStream;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @Table(name = "STANDARD", uniqueConstraints = { @UniqueConstraint(columnNames = {
@@ -39,8 +40,12 @@ public class Standard {
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "SCHOOL_ID")
 	private School school;
+	
+	@JsonIgnore
 	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "standard")
 	List<Subject> subjectList = new ArrayList<Subject>();
+	
+	@JsonIgnore
 	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "standard")
 	List<Student> studentList = new ArrayList<Student>();
 
