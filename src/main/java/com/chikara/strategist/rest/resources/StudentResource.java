@@ -60,7 +60,7 @@ public class StudentResource
    @GET
    @Path("/student/{studentUUID}")
    @Produces(MediaType.APPLICATION_JSON)
-   public Student getStudent(@PathParam("studentUUID") String studentUUID){
+   public Map<String, Object> getStudent(@PathParam("studentUUID") String studentUUID){
 	   return studentDao.getStudentById(studentUUID);
    }
 	

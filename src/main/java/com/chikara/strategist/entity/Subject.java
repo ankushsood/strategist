@@ -13,7 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.codehaus.jackson.annotate.JsonIgnore;
+
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -25,19 +27,23 @@ public class Subject{
 	@Column(name = "ID", nullable = false)
 	private String id;
 
+	@JsonManagedReference()
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
 	private List<Book> bookList;
 
-	@JsonIgnore
+
 	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonBackReference
 	private List<Student> student;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "FACULTY_ID")
+	@JsonBackReference
 	private Faculty faculty;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "STANDARD_ID")
+	@JsonBackReference
 	private Standard standard;
 
 	@Column(name = "SUBJECT_NAME", nullable = false)
@@ -46,13 +52,16 @@ public class Subject{
 	@Column(name = "SUBJECT_DESCRIPTION", nullable = false)
 	private String subjectDescription;
 
+	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
 	private List<Exam> examList;
 	
 	@OneToOne
+	@JsonBackReference
 	private ProjectedProgressPlan projectedProgressPlan;
 	
 	@OneToOne
+	@JsonBackReference
 	private CurrentProgressPlan currentProgressPlan;
 	
 	public String getId() {

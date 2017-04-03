@@ -46,14 +46,12 @@
 		  })
 
 		.state('home.studentList', {
-			url: '/studets',
+			url: '/students',
 			views: {
 			  'detail@home' : {
 				  templateUrl: 'src/admin/student/list.html',
 				  controller : 'StudentListController',
 				  controllerAs: 'stuList',
-				 
-
 			  },
 			},
 		  })
@@ -68,6 +66,7 @@
 			},
 		  })
 		  .state('home.viewStudentDetails', {
+			params : {studentId : null},
 			url: '/profile',
 			views: {
 			  'detail@home' : {

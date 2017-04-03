@@ -32,7 +32,7 @@
 	 -->
 
      <!-- Hibernate SessionFactory -->
-   <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+   	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource"><ref bean="dataSource"/></property>
          <property name="packagesToScan" value="com.chikara.strategist.entity" />
         <property name="hibernateProperties">
@@ -42,10 +42,10 @@
 			<prop key="hibernate.hbm2ddl.auto">update</prop>
         </props>
         </property>
-    </bean> 
+    </bean>
 	
 	
-	<!-- <bean id="entityManagerFactory"
+	<!--<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
         <property name="persistenceUnitName" value="StrategistPersistenceUnit" />
@@ -77,7 +77,8 @@
 	</bean>  
 
 	<!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
-	<tx:annotation-driven/>
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
     <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
     	<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>

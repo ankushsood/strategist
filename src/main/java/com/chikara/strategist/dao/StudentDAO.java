@@ -1,15 +1,17 @@
 package com.chikara.strategist.dao;
 
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
+import org.apache.commons.lang3.time.FastDateFormat;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.chikara.strategist.entity.Student;
 
@@ -24,12 +26,12 @@ public class StudentDAO extends JpaDao<Student, String> implements IStudentDao{
 	
 	private HibernateTemplate hibernateTemplate;
 	
-	private String GET_STUDENT_LIST = "SELECT s.id, CONCAT(first_name , ' ' ,  last_Name ) AS studentName , "
-			+ "Guardian_name as guardianName, Image_Path as dp, Mobile_number as contactNo, c.CLASS_CODE as class, "
-			+ "CLASS_SECTION as section FROM student s "
-			+ "JOIN standard c ON(s.standard_id = c.id)";
+	private String GET_STUDENT_LIST = "SELECT new map(s.id as id, s.firstName as firstName, s.lastName as lastName, s.guardianName as guardianName, s.imagePath as imagePath,"
+			+ " s.mobileNumber as mobileNumber, c.classCode as classCode, c.classSection as classSection ) FROM Student s JOIN s.standard c";
 	
-	
+	private String GET_STUDENT_DETAILS = "SELECT new map(s.firstName as firstName, s.lastName as lastName, s.guardianName as guardianName, s.imagePath as imagePath, "
+			+ "s.mobileNumber as mobileNumber, s.address as address, s.dateOfBirth as dateOfBirth, s.city as city, s.state as state, s.pincode as pincode, c.classCode as classCode, c.classSection as classSection) "
+				+ "from Student s JOIN s.standard c where s.id = :id";
 	
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
@@ -40,13 +42,16 @@ public class StudentDAO extends JpaDao<Student, String> implements IStudentDao{
 		//String hql = "select * from Student where class_id";
 	}
 	
-	
-	public Student getStudentById(String studentUUID) {
-		/*Map<String, String> studentParams = new HashMap<String, String>();
-		studentParams.put("id", studentUUID);
-		return sqlTemplate.queryForObject("select * from Student where id = :id", studentParams, Student.class);
-		*/
-		return hibernateTemplate.load(Student.class, studentUUID);
+	//@Transactional(readOnly = true)
+	public Map<String, Object> getStudentById(String studentUUID) {
+		
+		TypedQuery<Map> query = getEntityManager().createQuery(GET_STUDENT_DETAILS, Map.class);
+		query.setParameter("id", studentUUID);
+		Map<String, Object> result = query.getSingleResult();
+		Date q = ((Date)result.get("dateOfBirth"));
+		FastDateFormat formatter = FastDateFormat.getInstance("dd-MMM-YYYY");
+		result.put("dateOfBirth", formatter.format(q));
+		return result;
 	}
 	
 	public void deleteStudent(String id){
@@ -64,9 +69,11 @@ public class StudentDAO extends JpaDao<Student, String> implements IStudentDao{
 		return student;
 	}
 	
-	@Transactional(readOnly = true)
+	@SuppressWarnings("unchecked")
+	//@Transactional(readOnly = true)
 	public List<Map<String, Object>> getStudentsList(){
-		return sqlTemplate.queryForList(GET_STUDENT_LIST, Collections.<String, Object>emptyMap());
+		Query query2 = getEntityManager().createQuery(GET_STUDENT_LIST);
+		return query2.getResultList();
 	}
 
 	@Override

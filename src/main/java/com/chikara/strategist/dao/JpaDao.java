@@ -5,10 +5,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class JpaDao<T extends Entity, I> implements Dao<T, I>
 {
@@ -26,7 +30,7 @@ public class JpaDao<T extends Entity, I> implements Dao<T, I>
         return this.entityManager;
     }
 
-    @PersistenceContext
+    @PersistenceContext(type = PersistenceContextType.TRANSACTION)
     public void setEntityManager(final EntityManager entityManager)
     {
         this.entityManager = entityManager;
@@ -80,5 +84,14 @@ public class JpaDao<T extends Entity, I> implements Dao<T, I>
     public void delete(T entity)
     {
         this.getEntityManager().remove(entity);
+    }
+    
+    public Map<String, Object> mapDatabaseResponse(String [] header, Object[] data){
+    	Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+    	for (int i = 0; i < header.length; i++) {
+			resultMap.put(header[i], data[i]);
+		}
+    	return resultMap;
+    	
     }
 }

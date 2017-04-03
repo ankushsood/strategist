@@ -1,7 +1,7 @@
 package com.chikara.strategist.entity;
 
 import java.util.Date;
-import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 
 
 import java.util.List;
@@ -55,11 +55,11 @@ public class Faculty {
 	@Column(name = "ID", nullable = false)
 	private String id;
 
-	@JsonIgnore
+	@JsonManagedReference
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "faculty")
 	private List<Standard> standardList;
 	
-	@JsonIgnore
+	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "faculty")
 	private List<Subject> subjectList;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "faculty")

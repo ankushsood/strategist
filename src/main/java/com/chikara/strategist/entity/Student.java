@@ -1,6 +1,8 @@
 package com.chikara.strategist.entity;
 
+import java.util.Date;
 import java.util.List;
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,7 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
 
 
@@ -31,13 +34,20 @@ public class Student  implements com.chikara.strategist.entity.Entity {
 	private String id;
 
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "student")
+	@JsonManagedReference
 	public List<Subject> subjectList;
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+	@JsonBackReference
 	public List<Homework> homeworkList;
+	
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "STANDARD_ID")
+	@JsonBackReference
 	private Standard standard;
-	
+
+	@Column(name = "DATE_OF_BIRTH")
+	private Date dateOfBirth;
 	@Column(name = "FIRST_NAME")
 	public String firstName;
 	@Column(name = "LAST_NAME")
