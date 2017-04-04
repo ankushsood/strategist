@@ -38,16 +38,6 @@ public class StudentResource
 	
 	@Autowired
 	private StudentTimelineRepository  studentTimelineRepository;
-	
-/*	@Autowired
-    private UserService userService;
-/*
-    @Autowired
-    @Qualifier("authenticationManager")
-    private AuthenticationManager authManager;
-*/
- 
-	
 
 	@GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -67,12 +57,19 @@ public class StudentResource
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/timeline")
 	public StudentTimeline addStudentTimeline(StudentTimeline studentTimeline){
 		studentTimeline.setEventCreationDateTime(new Date());
 		return studentTimelineRepository.save(studentTimeline);
 	}
 	
 	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/timeline/{studentUUID}")
+	public Iterable<StudentTimeline> getStudentTimeline(@PathParam("studentUUID") String studentUUID){
+		return studentTimelineRepository.findByStudentId(studentUUID, 4);
+	}
 	
 	
     private Map<String, Boolean> createRoleMap(UserDetails userDetails)

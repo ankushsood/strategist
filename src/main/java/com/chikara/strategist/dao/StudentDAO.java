@@ -30,8 +30,11 @@ public class StudentDAO extends JpaDao<Student, String> implements IStudentDao{
 			+ " s.mobileNumber as mobileNumber, c.classCode as classCode, c.classSection as classSection ) FROM Student s JOIN s.standard c";
 	
 	private String GET_STUDENT_DETAILS = "SELECT new map(s.firstName as firstName, s.lastName as lastName, s.guardianName as guardianName, s.imagePath as imagePath, "
-			+ "s.mobileNumber as mobileNumber, s.address as address, s.dateOfBirth as dateOfBirth, s.city as city, s.state as state, s.pincode as pincode, c.classCode as classCode, c.classSection as classSection) "
-				+ "from Student s JOIN s.standard c where s.id = :id";
+			+ "s.mobileNumber as mobileNumber, s.address as address, s.dateOfBirth as dateOfBirth, s.city as city, s.state as state, s.pincode as pincode, c.classCode as classCode, c.classSection as classSection"
+			+ ", f.firstName as facultyFirstName, f.lastName as facultyLastName, c.classCode as classCode, c.classSection as classSection, f.imagePath as facultyImage, f.id as facultyId) "
+				+ "from Student s JOIN s.standard c "
+				+ " JOIN c.faculty f WHERE f.id = c.standardTeacherID"
+				+ " and s.id = :id";
 	
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
@@ -48,9 +51,11 @@ public class StudentDAO extends JpaDao<Student, String> implements IStudentDao{
 		TypedQuery<Map> query = getEntityManager().createQuery(GET_STUDENT_DETAILS, Map.class);
 		query.setParameter("id", studentUUID);
 		Map<String, Object> result = query.getSingleResult();
-		Date q = ((Date)result.get("dateOfBirth"));
-		FastDateFormat formatter = FastDateFormat.getInstance("dd-MMM-YYYY");
-		result.put("dateOfBirth", formatter.format(q));
+		Date dob = ((Date)result.get("dateOfBirth"));
+		if(dob != null){
+			FastDateFormat formatter = FastDateFormat.getInstance("dd-MMM-YYYY");
+			result.put("dateOfBirth", formatter.format(dob));
+		}
 		return result;
 	}
 	

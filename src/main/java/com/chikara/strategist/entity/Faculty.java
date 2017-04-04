@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -56,21 +57,19 @@ public class Faculty {
 	private String id;
 
 	@JsonManagedReference
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "faculty")
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "faculty", fetch = FetchType.LAZY)
 	private List<Standard> standardList;
 	
 	@JsonManagedReference
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "faculty")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "faculty", fetch = FetchType.LAZY)
 	private List<Subject> subjectList;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "faculty")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "faculty", fetch = FetchType.LAZY)
 	private List<Homework> homeWorkList;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "SCHOOL_ID")
 	private School school;
 
-	@Column(name = "STANDARD_TEACHER_ID")
-	private String standardTeacherID;
 
 	@Column(name = "FIRST_NAME")
 	private String firstName;
@@ -270,14 +269,6 @@ public class Faculty {
 
 	public Date getJoiningDate() {
 		return joiningDate;
-	}
-
-	public void setStandardTeacherID(String standardTeacherID) {
-		this.standardTeacherID = standardTeacherID;
-	}
-
-	public String getStandardTeacherID() {
-		return standardTeacherID;
 	}
 
 	public void setFACULTY_NAME(String fACULTY_NAME) {

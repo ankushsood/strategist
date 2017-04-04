@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -33,15 +34,15 @@ public class Student  implements com.chikara.strategist.entity.Entity {
 	@Column(name = "ID", nullable = false)
 	private String id;
 
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "student")
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "student", fetch = FetchType.LAZY)
 	@JsonManagedReference
 	public List<Subject> subjectList;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student", fetch = FetchType.LAZY)
 	@JsonBackReference
 	public List<Homework> homeworkList;
 	
-	@ManyToOne(cascade = { CascadeType.ALL })
+	@ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "STANDARD_ID")
 	@JsonBackReference
 	private Standard standard;

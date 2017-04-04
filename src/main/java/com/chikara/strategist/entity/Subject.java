@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -28,20 +29,20 @@ public class Subject{
 	private String id;
 
 	@JsonManagedReference()
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject", fetch = FetchType.LAZY)
 	private List<Book> bookList;
 
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonBackReference
 	private List<Student> student;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "FACULTY_ID")
 	@JsonBackReference
 	private Faculty faculty;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "STANDARD_ID")
 	@JsonBackReference
 	private Standard standard;
@@ -53,7 +54,7 @@ public class Subject{
 	private String subjectDescription;
 
 	@JsonManagedReference
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject", fetch = FetchType.LAZY)
 	private List<Exam> examList;
 	
 	@OneToOne

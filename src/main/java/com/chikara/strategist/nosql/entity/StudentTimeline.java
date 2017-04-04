@@ -123,4 +123,12 @@ public class StudentTimeline {
 		public void setEventCreatorImagePath(String eventCreatorImagePath) {
 			this.eventCreatorImagePath = eventCreatorImagePath;
 		}
+
+		public String getBadgeString() {
+			return badgeString;
+		}
+
+		public void setBadgeString(String badgeString) {
+			this.badgeString = badgeString;
+		}
 }

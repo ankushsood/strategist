@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -37,19 +38,19 @@ public class Standard {
 	@Column(name = "ID", nullable = false)
 	private String id;
 
-	@ManyToOne(cascade = { CascadeType.ALL })
+	@ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "SCHOOL_ID")
 	private School school;
 	
 	@JsonManagedReference
-	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "standard")
+	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "standard", fetch = FetchType.LAZY)
 	List<Subject> subjectList = new ArrayList<Subject>();
 	
 	@JsonManagedReference
-	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "standard")
+	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "standard", fetch = FetchType.LAZY)
 	List<Student> studentList = new ArrayList<Student>();
 
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	private List<Faculty> faculty;
 	@Column(name = "remarks", length = 3000)
 	private String remarks;
@@ -71,6 +72,9 @@ public class Standard {
 	@Column(name = "STREAM")
 	private SubjectStream stream;
 
+	@Column(name = "STANDARD_TEACHER_ID")
+	private String standardTeacherID;
+	
 	public String getId() {
 		return id;
 	}
@@ -157,5 +161,13 @@ public class Standard {
 
 	public void setStudentList(List<Student> studentList) {
 		this.studentList = studentList;
+	}
+	
+	public void setStandardTeacherID(String standardTeacherID) {
+		this.standardTeacherID = standardTeacherID;
+	}
+
+	public String getStandardTeacherID() {
+		return standardTeacherID;
 	}
 }

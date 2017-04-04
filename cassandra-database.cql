@@ -10,5 +10,5 @@ CREATE TABLE IF NOT EXISTS strategist.studentTimeline (
 	eventCreatorImagePath text,
 	eventType text,
 	eventCreationDateTime timestamp,
-    PRIMARY KEY (id, studentId, eventCreationDateTime)
-) WITH CLUSTERING ORDER BY (studentId DESC, eventCreationDateTime DESC);
+    PRIMARY KEY (studentId, id, eventCreationDateTime)
+) WITH CLUSTERING ORDER BY (id DESC, eventCreationDateTime DESC);

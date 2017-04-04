@@ -13,8 +13,8 @@ public interface StudentTimelineRepository extends CassandraRepository<StudentTi
     //
 	
 	
-	  @Query("SELECT * FROM studentTimeline WHERE user=?0 LIMIT ?1")
-	   Iterable<StudentTimeline> findByStudentId(String user,Integer limit);
+	  @Query("SELECT * FROM studentTimeline WHERE studentid=?0 LIMIT ?1")
+	  Iterable<StudentTimeline> findByStudentId(String studentid,Integer limit);
 	 
 	  
 	  

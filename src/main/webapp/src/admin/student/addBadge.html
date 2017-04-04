@@ -2,55 +2,67 @@
           <div class="modal-dialog">
             <div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" ng-click="addBadge.close({desc:'', badgeType:''})" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<button type="button" class="close" ng-click="addBadge.close(!addBadgeForm.$valid,{})"  aria-hidden="true">&times;</button>
 				<h4 class="modal-title">Add Badge</h4>
 			</div>
               <div >
-                <div class="x_content">
-                      </br>
-					  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Title <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input required="required" type="text" data-ng-model="addBadge.badgeData.text" class="form-control col-md-8 col-xs-13"/>
-			          </div>
-				    <div class="clearfix"></div>
+			    <form name="addBadgeForm" novalidate> 
 
-					<br />
+					<div class="x_content">
+						  </br>
+						  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Title <span class="required">*</span>
+						  </label>
+						  <div class="col-md-6 col-sm-6 col-xs-12">
+							<input name = "title" ng-required="true" type="text" data-ng-model="addBadge.badgeData.title" class="form-control col-md-8 col-xs-13"/>
+						    <p ng-show="addBadgeForm.title.$error.required" class="error">Please Enter Event Title.</p>
 
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Badge Type <span class="required">*</span>
-                    </label>
-					<div  class="col-md-7 col-sm-7 col-xs-13 ">
-						
-						<div ng-repeat="badge in addBadge.badgeList" class="col-md-4 badgelist">
-						      <a href="javascript:void(0)"  ng-click="addBadge.badgeData.selectedBadge = badge.badgeTitle;addBadge.activeValue=badge.badgeTitle">
-								<div class="thumbnail" ng-class="{highlightIcon : addBadge.activeValue === badge.badgeTitle}">
-									<img  style=" display: block;height:60px;width:60px;"  ng-src="{{badge.badgeIconUrl}}" alt="image" />
-									<div class="">
-										<p>{{badge.badgeTitle}}</p>
+						  </div>
+						<div class="clearfix"></div>
+
+						<br />
+
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Badge Type <span class="required">*</span>
+						</label>
+						<div  class="col-md-7 col-sm-7 col-xs-13 ">
+							
+							<div ng-repeat="badge in addBadge.badgeList" class="col-md-4 badgelist">
+								  <a href="javascript:void(0)"  ng-click="addBadge.badgeData.selectedBadge = badge.badgeTitle;addBadge.activeValue=badge.badgeTitle">
+									<div class="thumbnail" ng-class="{highlightIcon : addBadge.activeValue === badge.badgeTitle}">
+										<img  style=" display: block;height:60px;width:60px;"  ng-src="{{badge.badgeIconUrl}}" alt="image" />
+										<div class="">
+											<p>{{badge.badgeTitle}}</p>
+										</div>
 									</div>
-								</div>
-							</a>
+								</a>
+								<input ng-required="true" type="hidden" data-ng-model = "addBadge.badgeData.selectedBadge" name="selectedBadge" />
+								
+
+							</div>
+							<p ng-show="addBadgeForm.selectedBadge.$error.required" class="error">Please Select Badge.</p>
 						</div>
-					</div>
-				    <div class="clearfix"></div>
-					<br/>
-
-
-	
+						<div class="clearfix"></div>
 						<br/>
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Description <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <textarea required="required"  data-ng-model="addBadge.badgeData.desc" class="form-control col-md-8 col-xs-13">
-						</textarea>
-                      </div>
-                    
 
-              </div>
-              <div class="modal-footer">
-                <button type="button" ng-click="addBadge.close(addBadge.badgeData)" class="btn btn-primary" >Save</button>
-				<button type="button" ng-click="addBadge.close({})" class="btn btn-default" >Cancel</button>
-              </div>
+
+		
+							<br/>
+						  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Description <span class="required">*</span>
+						  </label>
+						  <div class="col-md-6 col-sm-6 col-xs-12">
+							<textarea type="text" ng-required="true"  data-ng-model="addBadge.badgeData.desc" class="form-control col-md-8 col-xs-13" name= "description">
+							</textarea>
+							<p ng-show="addBadgeForm.description.$error.required" class="error">Please Enter Event Details.</p>
+
+						  </div>
+						
+
+				  </div>
+				  <div class="modal-footer">
+					<button  type="button" ng-disabled="addBadgeForm.$invalid"  ng-click="addBadge.close(addBadgeForm.$valid, addBadge.badgeData)" class="btn btn-primary" >Save</button>
+					<button type="button" ng-click="addBadge.close(!addBadgeForm.$valid, {})" class="btn btn-default" >Cancel</button>
+				  </div>
+			  </form>
             </div>
           </div>
         </div>
+		</div>
