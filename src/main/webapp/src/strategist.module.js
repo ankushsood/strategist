@@ -1,7 +1,7 @@
 (function() {
 "use strict";
 
-angular.module('strategist', ['ngResource', 'login','admin'])
+angular.module('strategist', ['ngResource', '720kb.datepicker', 'login','admin', 'ui.bootstrap'])
 .config(config);
 
 config.$inject = ['$urlRouterProvider'];

@@ -1,6 +1,6 @@
 (function() {
 'use strict';
-	
+	var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 	angular.module('admin').controller('StudentListController', StudentListController );
 	angular.module('admin').controller('ViewStudentDetailsController', ViewStudentDetailsController );
 	angular.module('admin').controller('AddStudentBadge', AddStudentBadge );
@@ -38,6 +38,13 @@
 			_this.student = result;
 			
 		});
+		
+		_this.getDate = function(dateString){
+			return new Date(dateString).getDate();
+		}
+		_this.getMonth = function(dateString){
+			return monthNames[new Date(dateString).getMonth()];
+		}
 		
 		_this.show = function() {
 			ModalService.showModal({

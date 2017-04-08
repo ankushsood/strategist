@@ -123,15 +123,62 @@
                   <div class="col-md-9 col-sm-9 col-xs-12">
 
                     <div class="profile_title">
-                      <div class="col-md-6">
-                        <h2>Report Card</h2>
-                      </div>
                       <div class="col-md-6 pull-right">
-                        <div id="reportrange" class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">
-                          <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                          <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-                        </div>
-                      </div>
+                        <!-- <div id="reportrange" class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED"> -->
+                          <!-- <i class="glyphicon glyphicon-calendar fa fa-calendar"></i> -->
+                          <!-- <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b> -->
+                        <!-- </div> -->
+						<datepicker>
+							<input ng-model="dateFrom" type="text"/>
+						</datepicker>
+						<datepicker>
+							<input ng-model="dateTo" type="text"/>
+						</datepicker>
+
+						
+						
+						
+												
+<accordion>
+    <accordion-group  heading="Text HEad1" is-open="false">
+      <accordion-heading>
+                some text here, on the left side of the header.
+                
+      </accordion-heading>
+      This is just some content to illustrate fancy headings.
+	  
+	  
+	  
+    </accordion-group>   
+
+
+ <accordion-group  heading="Text HEad2" is-open="false">
+      <accordion-heading>
+                some text here, on the left side of the header.
+                
+      </accordion-heading>
+      This is just some content to illustrate fancy headings.
+	  
+	  
+	  
+    </accordion-group> 
+
+
+ <accordion-group  heading="Text HEad3" is-open="false">
+      <accordion-heading>
+                some text here, on the left side of the header.
+                
+      </accordion-heading>
+      This is just some content to illustrate fancy headings.
+	  
+	  
+	  
+    </accordion-group> 	
+	
+  </accordion>
+  
+  
+						</div>
                     </div>
                     <!-- start of user-activity-graph -->
                     <div id="graph_bar" style="width:100%; height:280px;"></div>
@@ -143,8 +190,8 @@
                             <li ng-repeat="studentTimeline in studentCtrl.studentTimelineList">
                               <img ng-src="{{studentCtrl.student.facultyImage}}" onerror="this.src='images/img.png'" title = "{{studentCtrl.student.facultyFirstName}} {{studentCtrl.student.facultyLastName}}" alt="{{studentCtrl.student.facultyFirstName}} {{studentCtrl.student.facultyLastName}}" class="avatar" alt="Avatar">
                               <div class="message_date">
-                                <h3 class="date text-info">24</h3>
-                                <p class="month">May</p>
+                                <h3 class="date text-info">{{studentCtrl.getDate(studentTimeline.eventCreationDateTime)}}</h3>
+                                <p class="month">{{studentCtrl.getMonth(studentTimeline.eventCreationDateTime)}}</p>
                               </div>
                               <div class="message_wrapper">
                                 <h4 class="heading">{{studentTimeline.title}}</h4>
