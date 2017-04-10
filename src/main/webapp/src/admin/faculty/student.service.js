@@ -4,42 +4,12 @@
 	angular.module('admin')
 	.service('ListStudentService', ListStudentService)
 	.service('GetStudentDetailsService', GetStudentDetailsService)
-	.service('CreateStudentTimelineEventService', CreateStudentTimelineEventService)
-	.service('GetAllSubjectService', GetAllSubjectService)
-	.service('GetAllStandardService', GetAllStandardService);
-	
+	.service('CreateStudentTimelineEventService', CreateStudentTimelineEventService);
+
 	ListStudentService.$inject=['$resource']
 	GetStudentDetailsService.$inject=['$resource']
 	CreateStudentTimelineEventService.$inject=['$resource']
-	GetAllSubjectService.$inject=['$resource']
-	GetAllStandardService.$inject=['$resource']
-	
-	function GetAllSubjectService($resource){
-		var service = this;
-		
-		return $resource('rest/subject/:subjectId',{subjectId:'@subjectId'},
-			{
-				listSubject: {
-					method: 'GET',
-					isArray : true,
-					headers : {'X-Access-Token' : 'asdf', 'Content-Type': 'application/json'}
-				}
-			}
-		);
-	}
-	
-	function GetAllStandardService($resource){
-		return $resource('rest/standard/', {},
-			{
-				listStandard: {
-					method: 'GET',
-					isArray : true,
-					headers : {'X-Access-Token' : 'asdf', 'Content-Type': 'application/json'}
-				}
-			}
-		);
-	}
-	
+
 	function ListStudentService($resource) {
 		return $resource('rest/students/', {},
 			{
@@ -81,6 +51,7 @@
 				isArray:true,
 				headers:{'X-Access-Token' : 'asdf','Content-Type':'application/json; charset=UTF-8'} 			
 			}
+			
 		});
 	}
 })();

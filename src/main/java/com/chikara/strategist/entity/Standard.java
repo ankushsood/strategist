@@ -30,7 +30,7 @@ import org.codehaus.jackson.annotate.JsonManagedReference;
 @Entity
 @Table(name = "STANDARD", uniqueConstraints = { @UniqueConstraint(columnNames = {
 		"CLASS_CODE", "CLASS_SECTION", "SCHOOL_ID" }) })
-public class Standard {
+public class Standard implements com.chikara.strategist.entity.Entity {
 
 	@Id
 	@GeneratedValue(generator = "system-uuid")
@@ -169,5 +169,10 @@ public class Standard {
 
 	public String getStandardTeacherID() {
 		return standardTeacherID;
+	}
+
+	@Override
+	public String getEntityId() {
+		return this.id;
 	}
 }

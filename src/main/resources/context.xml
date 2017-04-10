@@ -90,6 +90,12 @@
 	<bean id="studentDao" class="com.chikara.strategist.dao.StudentDAO" >
 		</bean>
 	
+	
+	<bean id="standardDao" class="com.chikara.strategist.dao.StandardDAO" >
+		</bean>
+				
+	<bean id="subjectDao" class="com.chikara.strategist.dao.SubjectDAO" >
+		</bean>
 		
 	<bean id="accessTokenDao" class="com.chikara.strategist.dao.accesstoken.JpaAccessTokenDao">
 		</bean>

@@ -21,7 +21,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "SUBJECT")
-public class Subject{
+public class Subject  implements com.chikara.strategist.entity.Entity {
 	@Id
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
@@ -143,6 +143,11 @@ public class Subject{
 
 	public List<Student> getStudent() {
 		return student;
+	}
+
+	@Override
+	public String getEntityId() {
+		return this.id;
 	}
 
 }

@@ -1,40 +1,39 @@
 package com.chikara.strategist.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import javax.persistence.Query;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.chikara.strategist.entity.School;
+import com.chikara.strategist.entity.Subject;
 
 @Repository
-public class SubjectDAO {
-	private HibernateTemplate hibernateTemplate;
-	
-	@Autowired
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		hibernateTemplate = new HibernateTemplate(sessionFactory);
+public class SubjectDAO extends JpaDao<Subject, String> implements ISubjectDao{
+
+	private String GET_SUBJECT_LIST = "SELECT new map(s.id as id, s.subjectTitle as subjectTitle) FROM Subject s WHERE standard.id = :standardId order by s.subjectTitle";
+
+
+	public SubjectDAO() {
+		super(Subject.class);
+	}
+
+	@Override
+	public List<Map<String, Object>> getSubjectList() {
+		Query query2 = getEntityManager().createQuery(GET_SUBJECT_LIST);
+		return query2.getResultList();
+	}
+
+	public List<Map<String, Object>> getSubjectByStandard(String standardId) {
+		Query query2 = getEntityManager().createQuery(GET_SUBJECT_LIST);
+		query2.setParameter("standardId", standardId);
+		return query2.getResultList();
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<School> getSchool() {
-		return (List<School>) hibernateTemplate.find("from School");
-	}
-	public void deleteSchool(int id){
-		Object record = hibernateTemplate.load(School.class, id);
-		hibernateTemplate.delete(record);
-	}
-	
-	public School saveSchool(School school){
-		hibernateTemplate.save(school);
+	@Override
+	public Map<String, Object> getSubjectById(String subjectUUID) {
 		
-		return school;
-	}
-	public School updateSchool(School school){
-		hibernateTemplate.update(school);
-		return school;
+		return null;
 	}
 }

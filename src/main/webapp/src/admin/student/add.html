@@ -1,3 +1,10 @@
+<Style>
+
+.select2-choice{
+
+}
+</Style>
+
 <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -24,31 +31,90 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
+                      <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Father's Name</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
+                        <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text">
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <div id="gender" class="btn-group" data-toggle="buttons">
-                          <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="gender" value="male"> &nbsp; Male &nbsp;
-                          </label>
-                          <label class="btn btn-primary active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="gender" value="female" checked=""> Female
-                          </label>
+                          <p>
+						M:
+                      <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /> 
+						F:
+                      <input type="radio" class="flat" name="gender" id="genderF" value="F" />
+                    </p>
                         </div>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                      <div class="col-md-6 col-sm-6 col-xs-12" >
+                        <datepicker date-format = "dd-MMM-yyyy">
+							<input ng-model="dateOfBirth" type="text" required="required" class="date-picker form-control col-md-7 col-xs-12"/>
+						</datepicker>
                       </div>
                     </div>
+					
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12">Address <span class="required">*</span>
+						</label>
+						<div class="col-md-6 col-sm-6 col-xs-12" >
+							<input name="address1" class="form-control col-md-7 col-xs-12" type="text"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+						<div class="col-md-6 col-sm-6 col-xs-12" >
+	                        <input id="address2"  class="form-control col-md-7 col-xs-12" type="text"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12">City <span class="required">*</span>
+						</label>
+						<div class="col-md-6 col-sm-6 col-xs-12" >
+							<input disabled ng-model= "addStudentCtrl.city"  class="form-control col-md-7 col-xs-12" type="text"/>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12">State <span class="required">*</span>
+						</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<input  disabled ng-model= "addStudentCtrl.state" name = "state" class="form-control col-md-7 col-xs-12" type="text"/>
+						</div>
+					</div>
+					
+					
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12">Standard <span class="required">*</span>
+						</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<!--<Select class="form-control" ng-model="addStudentCtrl.selectedStandard" ng-change="addStudentCtrl.getSubject()" >
+								<option ng-repeat = "standard in addStudentCtrl.standardList" ng-value = "{{stadard.id}}">{{standard.classCode}} - {{standard.classSection}}</option>
+							</select>-->
+							
+							<select class="form-control"  ng-model="addStudentCtrl.selectedStandard" ng-change="addStudentCtrl.getSubject(addStudentCtrl.selectedStandard)"  >
+								<option value="">Select Account</option>
+								<option ng-repeat = "standard in addStudentCtrl.standardList" value = "{{standard.id}}">{{standard.classCode}} - {{standard.classSection}}</option>
+							</select>
+						
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12">Subjects</label>
+						<div  class="col-md-9 col-sm-9 col-xs-12">
+							<select   class="select2_multiple form-control" multiple="multiple">
+							</select>
+						</div>
+					</div>
+				
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -63,13 +129,8 @@
             </div>
           </div>
 
-          <script type="text/javascript">
-            $(document).ready(function() {
-              $('#birthday').daterangepicker({
-                singleDatePicker: true,
-                calender_style: "picker_4"
-              }, function(start, end, label) {
-                console.log(start.toISOString(), end.toISOString(), label);
-              });
-            });
-          </script>
+     <script>
+	 $(".select2_multiple").select2({
+        allowClear: true
+      });
+	  </script>
