@@ -32,7 +32,8 @@
 			  },
 			  'top@home' : 	{
 								templateUrl: 'src/admin/menu/adminTop.html',
-								controller : 'AdminHeaderCotroller'
+								controller : 'AdminHeaderCotroller',
+								controllerAs: 'adminHeader'
 							},
 			  'left@home' : {	
 								templateUrl: 'src/admin/menu/leftMenu.html',

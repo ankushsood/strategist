@@ -32,6 +32,7 @@ public class UserResource
 {
     @Autowired
     private UserService userService;
+    @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
     @Qualifier("authenticationManager")
@@ -69,9 +70,9 @@ public class UserResource
     public AccessToken authenticate(@FormParam("username") String username, @FormParam("password") String password)
     {
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(username, password);
+                new UsernamePasswordAuthenticationToken(username, (password));
         
-/*        Authentication authentication = this.authManager.authenticate(authenticationToken);
+        Authentication authentication = this.authManager.authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         Object principal = authentication.getPrincipal();
@@ -79,29 +80,52 @@ public class UserResource
             throw new WebApplicationException(401);
         }
         
-*/		
+		
         
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		authentication.setAuthenticated(true); 
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		authentication.setAuthenticated(true); 
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		
-        User adminUser = new User(username, "admin");
         Set<Role> roles = new HashSet<Role>();
-        roles.add(Role.USER);
-        roles.add(Role.ADMIN);
+        User adminUser = new User(username, password);
+
+		if(username.equals("ankush")){
+            roles.add(Role.FACULTY);
+            roles.add(Role.USER);
+            
+    	}else{
+			roles.add(Role.USER);
+	        roles.add(Role.ADMIN);
+    	}
         adminUser.setRoles(roles);
         
         return this.userService.createAccessToken(adminUser);
     }
 
+    /*
+    @Path("authenticate")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public AccessToken logout(String username)
+    {
+    	
+    
+    }*/
     private Map<String, Boolean> createRoleMap(UserDetails userDetails)
     {
         Map<String, Boolean> roles = new HashMap<String, Boolean>();
-        for (GrantedAuthority authority : userDetails.getAuthorities()) {
-            roles.put(authority.getAuthority(), Boolean.TRUE);
-        }
 
+    	if(userDetails.getUsername().equals("admin")){
+	        for (GrantedAuthority authority : userDetails.getAuthorities()) {
+	            roles.put(authority.getAuthority(), Boolean.TRUE);
+	        }
+    	}
+
+    	if(userDetails.getUsername().equals("ankush")){
+            roles.put("USER", Boolean.TRUE);
+            roles.put("FACULTY", Boolean.TRUE);
+            
+    	}
         return roles;
     }
 }

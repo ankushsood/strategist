@@ -31,8 +31,10 @@ public class JpaAccessTokenDao extends JpaDao<AccessToken, Long> implements Acce
     public AccessToken findByToken(String accessTokenString)
     {
     	
+    	if(this.accessTokenMap.keySet() == null || this.accessTokenMap.keySet().isEmpty()){
+    		return this.accessTokenMap.get("DUMMY");
+    	}
     	String accTokenString = (String)this.accessTokenMap.keySet().toArray()[0];
-    	
     	return this.accessTokenMap.get(accTokenString);
     }
     
@@ -41,11 +43,9 @@ public class JpaAccessTokenDao extends JpaDao<AccessToken, Long> implements Acce
     @Transactional
     public AccessToken save(AccessToken entity)
     {
-    	
     	accessTokenMap.put(entity.getToken(), entity);
         return entity;
     }
-
 }
 
 

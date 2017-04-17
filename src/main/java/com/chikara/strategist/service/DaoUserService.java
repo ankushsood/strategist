@@ -4,6 +4,8 @@ import com.chikara.strategist.dao.accesstoken.AccessTokenDao;
 import com.chikara.strategist.entity.AccessToken;
 import com.chikara.strategist.entity.Role;
 import com.chikara.strategist.entity.User;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,7 @@ public class DaoUserService implements UserService
 {
 
     private AccessTokenDao accessTokenDao;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     protected DaoUserService()
@@ -37,13 +40,17 @@ public class DaoUserService implements UserService
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
-        User adminUser = new User(username, this.passwordEncoder.encode("admin"));
+    	User adminUser = new User(username, this.passwordEncoder.encode(username));
         Set<Role> roles = new HashSet<Role>();
-        roles.add(Role.USER);
-        roles.add(Role.ADMIN);
+        
+    	if(username.equals("admin")){
+            roles.add(Role.ADMIN);
+            roles.add(Role.USER);
+    	}else     	if(username.equals("ankush")){
+            roles.add(Role.FACULTY);
+            roles.add(Role.USER);
+    	}
         adminUser.setRoles(roles);
-        
-        
         return adminUser;
     }
 

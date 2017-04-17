@@ -13,7 +13,7 @@ function UserService($resource) {
 				authenticate: {
 					method: 'POST',
 					params: {'action' : 'authenticate'},
-					headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+					headers : {'Content-Type': 'application/x-www-form-urlencoded', 'X-Access-Token' : undefined}
 				}
 			}
 		);

@@ -14,4 +14,6 @@ public interface IStandardDao extends Dao<Standard, String>
 	List<Map<String, Object>> getStandardList();
 	
 	Map<String, Object> getStandardById(String standardUUID);
+	
+	List<Map<String, Object>> getStandardListForFaculty(String facultyId);
 }

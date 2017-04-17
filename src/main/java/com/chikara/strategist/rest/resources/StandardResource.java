@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -32,4 +33,19 @@ public class StandardResource
 		List<Map<String, Object>> students = standardDao.getStandardList();
     	return students;
     }
+
+
+	@GET
+	@Path("/getStandardListForFaculty/{facultyId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Map<String, Object>> getStandardListForFaculty(@PathParam("facultyId") String facultyId)
+    {
+		List<Map<String, Object>> standards = standardDao.getStandardListForFaculty(facultyId);
+    	return standards;
+    }
+
+
+	
+
+
 }

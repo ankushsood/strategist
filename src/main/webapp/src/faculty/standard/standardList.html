@@ -1,0 +1,50 @@
+          <div class="clearfix"></div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="x_panel">
+                <div class="x_content">
+					<div class="page-title">
+					<div class="title_left">
+					  <h3>Standard List</h3>
+					</div>
+
+					
+				  </div>
+                  <div class="row">
+				  
+                    <div class="clearfix"></div>
+
+					
+                    <div  ng-repeat="standard in standardListCtrl.standardList" style= 'height:100% !important;' class="col-md-4 col-sm-4 col-xs-12 animated fadeInDown">
+                      <div class="well profile_view">
+                        <div class="col-sm-12">
+                          <!--<h4 class="brief"><i></i></h4>-->
+                          <div style='height:160px;'>
+                            <ul class="list-unstyled">
+							    <li style='text-transform:uppercase;font-size:25px;'><span>{{standard.standard}}</span></li>
+								<li>&nbsp;</li>
+								<li><i class="glyphicon glyphicon-book"></i><span style="padding-left: 10px;">{{standard.subjectTitleList}}</span></li>
+								<li><i class="fa fa-group"></i><span style="padding-left: 10px;">{{standard.studentCount}}</span></li>
+							</ul>
+                          </div>
+                          
+                        </div>
+                        <div class="col-xs-12 bottom text-center">
+							<a ui-sref="home.viewstandardDetails({standardId: standard.id})" class="text-right"> <span class="btn btn-info btn-sm" style="width:110px;padding:5px;">Mark Attendence</span></a>
+<a ui-sref="home.viewstandardDetails({standardId: standard.id})" class="text-left"> <span class="btn btn-info btn-sm" style="width:110px;padding:5px;">Assign Homework</span></a>
+<a ui-sref="home.viewstandardDetails({standardId: standard.id})" class="text-right" > <span class="btn btn-info btn-sm" style="width:110px;;padding:5px;">Prepare Result</span></a>
+<a ui-sref="home.viewstandardDetails({standardId: standard.id})" class="text-left" > <span class="btn btn-info btn-sm" style="width:110px;padding:5px;">Announcement</span></a>
+
+<!--						<a ui-sref="home.viewstandardDetails({standardId: standard.id})" class="btn btn-primary btn-xs"> Mark Attendence</a>
+                            <a ui-sref="home.viewstandardDetails({standardId: standard.id})" class="btn btn-primary btn-xs"> Assign Homework</a>
+                            <a ui-sref="home.viewstandardDetails({standardId: standard.id})" class="btn btn-primary btn-xs"> Prepare Result</a>
+                            <a ui-sref="home.viewstandardDetails({standardId: standard.id})" class="btn btn-primary btn-xs"> Announcement</a>-->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>

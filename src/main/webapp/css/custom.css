@@ -890,7 +890,7 @@ legend {
   background: #fff;
 }
 .well.profile_view .bottom {
-  margin-top: -20px;
+  /*margin-top: -20px;*/
   background: #F2F5F7;
   padding: 9px 0;
   border-top: 1px solid #E6E9ED;
