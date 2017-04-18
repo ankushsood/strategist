@@ -23,16 +23,16 @@ public class StandardDAO extends JpaDao<Standard, String> implements IStandardDa
 	
 	private String GET_STANDARD_LIST = "SELECT new map(s.id as id, s.classCode as classCode, s.classSection as classSection) FROM Standard s order by s.classCode, classSection";
 
-	private String GET_STANDARD_LIST_FOR_FACULTY = "SELECT GROUP_CONCAT(DISTINCT subjectlis1_.SUBJECT_NAME  SEPARATOR ', ')AS subjectTitleList, COUNT(studentlis2_.STANDARD_ID) AS studentCount, standard0_.ID AS standardId, " + 
-		" concat(standard0_.CLASS_CODE ,'-', standard0_.CLASS_SECTION )AS standard  " +
-		" FROM STANDARD standard0_  " +
-		" INNER JOIN SUBJECT subjectlis1_ ON standard0_.ID=subjectlis1_.STANDARD_ID " + 
-		" INNER JOIN STUDENT studentlis2_ ON standard0_.ID=studentlis2_.STANDARD_ID  " +
-		" WHERE standard0_.STANDARD_TEACHER_ID=:standardTeacherID  " +
-		" GROUP BY studentlis2_.STANDARD_ID, standard0_.CLASS_CODE , standard0_.CLASS_SECTION " + 
-		" ORDER BY standard0_.CLASS_CODE";
+	private String GET_STANDARD_SUBJECT_LIST = "SELECT new map(s.id as standardId, GROUP_CONCAT(DISTINCT CONCAT(sub.SUBJECT_NAME  , '_' , sub.id) SEPARATOR ', ') AS subjectTitleList " 
+			+ " FROM STANDARD s "
+			+ " INNER JOIN SUBJECT sub ON s.ID=sub.STANDARD_ID " 
+			+ " WHERE s.standard_teacher_id=:standardTeacherID "
+			+ " GROUP BY s.CLASS_CODE , s.CLASS_SECTION";
 
-	
+	private String GET_STANDARD_LIST_FOR_FACULTY = "SELECT new map(s.id as id, s.classCode as classCode, s.classSection as classSection, count(stu.standard) as totalStudents) "
+			+ " FROM Standard s "
+			+ " JOIN s.studentList stu "
+			+ " where s.standardTeacherID = :standardTeacherID group by stu.standard  order by s.classCode, classSection";
 	
 	
 	@SuppressWarnings("unchecked")
@@ -47,8 +47,12 @@ public class StandardDAO extends JpaDao<Standard, String> implements IStandardDa
 		Map<String, String> paramMap = new HashMap<String, String>();
 		paramMap.put("standardTeacherID", facultyId);
 		
-		return sqlTemplate.queryForList(GET_STANDARD_LIST_FOR_FACULTY, paramMap);
-		
+		sqlTemplate.queryForList(GET_STANDARD_LIST_FOR_FACULTY, paramMap);
+	
+
+		Query query2 = getEntityManager().createQuery(GET_STANDARD_LIST_FOR_FACULTY);
+		query2.setParameter("standardTeacherID", facultyId);
+		return query2.getResultList();
 		
 	}
 

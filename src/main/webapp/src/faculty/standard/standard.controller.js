@@ -2,7 +2,14 @@
 'use strict';
 
 
-	angular.module('faculty').controller('StandardListController', StandardListController);
+	angular.module('faculty')
+	.filter('split', function() {
+        return function(input, splitChar, splitIndex) {
+            // do some bounds checking here to ensure it has that index
+            return input.split(splitChar)[splitIndex];
+        }
+    })
+	.controller('StandardListController', StandardListController);
 	StandardListController.$inject=['StandardListService']
 	
 	function StandardListController(StandardListService){
@@ -12,10 +19,14 @@
 			});
 			
 		standards.$promise.then(function (result){
+		
+		
+				
 				_this.standardList = result;
 		});
-	}
-	
-	
 		
+		_this.getSubjectIndex = function(num){
+			return new Array(num);
+		}
+	}
 })();

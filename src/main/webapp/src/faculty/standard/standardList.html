@@ -23,7 +23,15 @@
                             <ul class="list-unstyled">
 							    <li style='text-transform:uppercase;font-size:25px;'><span>{{standard.standard}}</span></li>
 								<li>&nbsp;</li>
-								<li><i class="glyphicon glyphicon-book"></i><span style="padding-left: 10px;">{{standard.subjectTitleList}}</span></li>
+								
+								      
+								<li>
+									<i class="glyphicon glyphicon-book" style="padding-right: 10px;"></i>
+									<span ng-repeat="value in standardListCtrl.getSubjectIndex(standard.totalSubjects) track by $index">
+									<a href ng-click="studentCtrl.showSubjectModal('{{standard.subjectTitleList|split:',':$index}}')">{{standard.subjectTitleList|split:',':$index}}</a>,</span>
+								</li>
+
+								
 								<li><i class="fa fa-group"></i><span style="padding-left: 10px;">{{standard.studentCount}}</span></li>
 							</ul>
                           </div>
