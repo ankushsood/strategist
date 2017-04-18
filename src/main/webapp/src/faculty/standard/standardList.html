@@ -21,18 +21,20 @@
                           <!--<h4 class="brief"><i></i></h4>-->
                           <div style='height:160px;'>
                             <ul class="list-unstyled">
-							    <li style='text-transform:uppercase;font-size:25px;'><span>{{standard.standard}}</span></li>
+							    <li style='text-transform:uppercase;font-size:25px;'><span>{{standard.classCode}}-{{standard.classSection}}</span></li>
 								<li>&nbsp;</li>
 								
 								      
 								<li>
 									<i class="glyphicon glyphicon-book" style="padding-right: 10px;"></i>
-									<span ng-repeat="value in standardListCtrl.getSubjectIndex(standard.totalSubjects) track by $index">
-									<a href ng-click="studentCtrl.showSubjectModal('{{standard.subjectTitleList|split:',':$index}}')">{{standard.subjectTitleList|split:',':$index}}</a>,</span>
+									
+									<span ng-repeat="sta in standard.subjectTitleList.split(',')">
+									
+									<a href ng-click="standardListCtrl.showSubjectModal(sta.split('~~')[1])">{{sta.split('~~')[0]}}</a>,</span>
 								</li>
 
 								
-								<li><i class="fa fa-group"></i><span style="padding-left: 10px;">{{standard.studentCount}}</span></li>
+								<li><i class="fa fa-group"></i><span style="padding-left: 10px;">{{standard.totalStudents}}</span></li>
 							</ul>
                           </div>
                           

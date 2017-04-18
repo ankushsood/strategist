@@ -1,6 +1,7 @@
 package com.chikara.strategist.dao;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -21,9 +22,9 @@ public class StandardDAO extends JpaDao<Standard, String> implements IStandardDa
 	@Autowired
 	private NamedParameterJdbcTemplate sqlTemplate;
 	
-	private String GET_STANDARD_LIST = "SELECT new map(s.id as id, s.classCode as classCode, s.classSection as classSection) FROM Standard s order by s.classCode, classSection";
+	private String GET_STANDARD_LIST = "SELECT s.id as id, s.classCode as classCode, s.classSection as classSection) FROM Standard s order by s.classCode, classSection";
 
-	private String GET_STANDARD_SUBJECT_LIST = "SELECT new map(s.id as standardId, GROUP_CONCAT(DISTINCT CONCAT(sub.SUBJECT_NAME  , '_' , sub.id) SEPARATOR ', ') AS subjectTitleList " 
+	private String GET_STANDARD_SUBJECT_LIST = "SELECT count(DISTINCT sub.SUBJECT_NAME) as totalSubject, s.id as standardId, GROUP_CONCAT(DISTINCT CONCAT(sub.SUBJECT_NAME  , '~~' , sub.id) SEPARATOR ', ') AS subjectTitleList " 
 			+ " FROM STANDARD s "
 			+ " INNER JOIN SUBJECT sub ON s.ID=sub.STANDARD_ID " 
 			+ " WHERE s.standard_teacher_id=:standardTeacherID "
@@ -47,13 +48,22 @@ public class StandardDAO extends JpaDao<Standard, String> implements IStandardDa
 		Map<String, String> paramMap = new HashMap<String, String>();
 		paramMap.put("standardTeacherID", facultyId);
 		
-		sqlTemplate.queryForList(GET_STANDARD_LIST_FOR_FACULTY, paramMap);
-	
-
+		List<Map<String, Object>> standardSubjectList = sqlTemplate.queryForList(GET_STANDARD_SUBJECT_LIST, paramMap);
+		
 		Query query2 = getEntityManager().createQuery(GET_STANDARD_LIST_FOR_FACULTY);
 		query2.setParameter("standardTeacherID", facultyId);
-		return query2.getResultList();
+		List<Map<String, Object>> facultyStandardList = query2.getResultList();
 		
+		for (Map<String, Object> standardSubjectMap : standardSubjectList) {
+			for (Map<String, Object> facultyStandardMap : facultyStandardList) {
+				if(standardSubjectMap.get("standardId").equals(facultyStandardMap.get("id"))){
+					facultyStandardMap.put("subjectTitleList", standardSubjectMap.get("subjectTitleList"));
+					facultyStandardMap.put("totalSubject", standardSubjectMap.get("totalSubject"));
+				}
+			}
+		}
+			
+		return facultyStandardList;		
 	}
 
 

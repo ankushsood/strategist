@@ -14,7 +14,7 @@
 	
 	function StandardListController(StandardListService){
 		var _this = this;
-		var standards = StandardListService.getStandardList({facultyId :'f374e8aa444785eb0144478613e30002'}, function(subjects) {
+		var standards = StandardListService.getStandardList({facultyId :'f374e8aa444785eb0144478613e80005'}, function(subjects) {
 				return standards;
 			});
 			
@@ -28,5 +28,13 @@
 		_this.getSubjectIndex = function(num){
 			return new Array(num);
 		}
+		
+		_this.showSubjectModal = ShowSubjectModal;
+	}
+	
+	
+	function ShowSubjectModal(selectedSubject){
+		
+		console.log(selectedSubject);
 	}
 })();
