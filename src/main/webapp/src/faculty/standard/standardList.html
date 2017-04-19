@@ -30,7 +30,7 @@
 									
 									<span ng-repeat="sta in standard.subjectTitleList.split(',')">
 									
-									<a href ng-click="standardListCtrl.showSubjectModal(sta.split('~~')[1], standardListCtrl.modalService)">{{sta.split('~~')[0]}}</a>,</span>
+									<a href ui-sref="teacher.standardSubjectBooks({selectedSubjectId: sta})" >{{sta.split('~~')[0]}}</a>,</span>
 								</li>
 
 								

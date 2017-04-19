@@ -54,6 +54,16 @@
 				  controllerAs: 'standardListCtrl'
 			  },
 			},
+		  }).state('teacher.standardSubjectBooks', {
+			url: '/standardSubjectBooks',
+			params : {selectedSubjectId : null},
+			views: {
+			  'detail@teacher' : {
+				  templateUrl: 'src/faculty/standard/subjectBookTemplate.html',
+				  controller : 'SubjectBookController',
+				  controllerAs: 'subBookController'
+			  },
+			},
 		  })
 		
 	}
