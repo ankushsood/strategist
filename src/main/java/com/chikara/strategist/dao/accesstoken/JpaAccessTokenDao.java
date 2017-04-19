@@ -46,6 +46,11 @@ public class JpaAccessTokenDao extends JpaDao<AccessToken, Long> implements Acce
     	accessTokenMap.put(entity.getToken(), entity);
         return entity;
     }
+    
+    @Override
+    public void clearAllTokens(){
+    	accessTokenMap.clear();
+    }
 }
 
 

@@ -14,11 +14,9 @@ import javax.persistence.Table;
 import org.codehaus.jackson.annotate.JsonBackReference;
 import org.hibernate.annotations.GenericGenerator;
 
-import com.chikara.strategist.constants.BookType;
-
 @Entity
 @Table(name="SUBJECT_BOOK")
-public class Book {
+public class Book implements com.chikara.strategist.entity.Entity {
 
 	@Id
 	@GeneratedValue(generator = "system-uuid")
@@ -29,11 +27,10 @@ public class Book {
 	@JoinColumn(name = "SUBJECT_ID")
 	@JsonBackReference
 	private Subject subject;
-	@Enumerated(EnumType.STRING)
 	@Column(name="BOOK_TYPE")
-	private BookType bookType;
+	private String bookType;
 	@Column(name="BOOK_TITLE")
-	private String booktitle;
+	private String bookTitle;
 	public String getId() {
 		return id;
 	}
@@ -46,16 +43,20 @@ public class Book {
 	public void setSubject(Subject subject) {
 		this.subject = subject;
 	}
-	public BookType getBookType() {
+	public String getBookType() {
 		return bookType;
 	}
-	public void setBookType(BookType bookType) {
+	public void setBookType(String bookType) {
 		this.bookType = bookType;
 	}
-	public String getBooktitle() {
-		return booktitle;
+	public String getBookTitle() {
+		return bookTitle;
 	}
-	public void setBooktitle(String booktitle) {
-		this.booktitle = booktitle;
+	public void setBookTitle(String bookTitle) {
+		this.bookTitle = bookTitle;
+	}
+	@Override
+	public String getEntityId() {
+		return this.id;
 	}
 }

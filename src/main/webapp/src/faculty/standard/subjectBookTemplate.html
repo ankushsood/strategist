@@ -1,0 +1,33 @@
+<div class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" ng-click="addBadge.close(!addBadgeForm.$valid,{})" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Book</h4>
+			</div>
+              <div style='padding:15px;'>
+			    
+				
+				<v-accordion  class="vAccordion--default" multiple >
+
+				  <v-pane ng-repeat="book in subBookController.subjectBooks" >
+					<v-pane-header>
+					  {{::book.bookTitle}}
+					</v-pane-header>
+					<v-pane-content>
+					  {{::book.bookType}}
+					  
+					</v-pane-content>
+				  </v-pane>
+
+				</v-accordion>
+				
+				
+				
+				
+				
+				
+            </div>
+          </div>
+        </div>
+		</div>

@@ -98,7 +98,6 @@ public class UserResource
 	        roles.add(Role.ADMIN);
     	}
         adminUser.setRoles(roles);
-        
         return this.userService.createAccessToken(adminUser);
     }
 

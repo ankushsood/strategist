@@ -27,8 +27,8 @@ numberOfBooks, Standard standard, Faculty faculty){
         Book book = null;
         for(int i = 0; i < numberOfBooks; i++){
             book = new Book();
-            book.setBooktitle(title + "- Part: " + i);
-            book.setBookType(BookType.CourseBook);
+            book.setBookTitle(title + "- Part: " + i);
+            book.setBookType("CourseBook");
             book.setSubject(subject);
             bookList.add(book);
             

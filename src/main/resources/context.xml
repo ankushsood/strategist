@@ -96,6 +96,8 @@
 				
 	<bean id="subjectDao" class="com.chikara.strategist.dao.SubjectDAO" >
 		</bean>
+	<bean id="bookDao" class="com.chikara.strategist.dao.BookDAO" >
+		</bean>
 		
 	<bean id="accessTokenDao" class="com.chikara.strategist.dao.accesstoken.JpaAccessTokenDao">
 		</bean>

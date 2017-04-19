@@ -76,6 +76,7 @@ public class DaoUserService implements UserService
     @Transactional
     public AccessToken createAccessToken(User user)
     {
+    	this.accessTokenDao.clearAllTokens();
         AccessToken accessToken = new AccessToken(user, UUID.randomUUID().toString());
         return this.accessTokenDao.save(accessToken);
     }
