@@ -15,7 +15,7 @@
                     <div class="col-sm-3 mail_list_column">
                       <div ng-repeat="book in subBookController.subjectBooks"  class="mail_list">
                         <div class="right">
-                          <h3>{{book.bookTitle}}</h3>
+                          <h3><a ui-sref="teacher.standardSubjectBooks({selectedSubjectId: sta})" >{{book.bookTitle}}</a></h3>
                           <p>{{book.bookType}}</p>
                         </div>
                       </div>
@@ -23,49 +23,8 @@
                     <!-- /MAIL LIST -->
 
                     <!-- CONTENT MAIL -->
-                    <div class="col-sm-9 mail_view">
-                      <div class="inbox-body">
-                        <div class="mail_heading row">
-                          <div class="col-md-8">
-                            <div class="compose-btn">
-                              <h4>Chapter Summary
-							  <a class="btn btn-sm btn-primary" href="mail_compose.html"><i class="fa fa-reply"></i> Add new Chapter</a>
-							  </h4>
-                            </div>
-
-                          </div>
-                          <div class="col-md-4 text-right">
-                            <p class="date"> </p>
-                          </div>
-                          <div class="col-md-12">
-                            <h4> {{subBookController.subjectTitle}}</h4>
-                          </div>
-                        </div>
-
-                        <div class="view-mail">
-
-				<v-accordion  class="vAccordion--default" multiple >
-
-				  <v-pane ng-repeat="book in subBookController.subjectBooks" >
-					<v-pane-header>
-					  {{::book.bookTitle}}
-					</v-pane-header>
-					<v-pane-content>
-					  {{::book.bookType}}
-					  
-					</v-pane-content>
-				  </v-pane>
-
-				</v-accordion>
-				
-				
-				
-				
-
-                        </div>
-                      </div>
-
-                    </div>
+                    <div ui-view="bookDetails"></div>
+					
                     <!-- /CONTENT MAIL -->
                   </div>
                 </div>

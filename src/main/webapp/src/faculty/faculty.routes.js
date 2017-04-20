@@ -9,19 +9,7 @@
 	 */
 	routeConfig.$inject = ['$stateProvider', '$httpProvider'];
 	function routeConfig ($stateProvider, $httpProvider) {
-	 // $httpProvider.interceptors.push('loginHttpInterceptor');
 
-	  // Routes
-	 /* $stateProvider
-		.state('home', {
-		  url: '/admin/home',
-		  templateUrl: 'src/admin/menu/leftMenu.html',
-		  controller : 'AdminHomeController',
-		  controllerAs: 'adminHomeCtrl',
-
-	  });
-	  
-	  */
 	  
 		$stateProvider
 		.state('teacher', {
@@ -62,6 +50,9 @@
 				  templateUrl: 'src/faculty/standard/subjectBookTemplate.html',
 				  controller : 'SubjectBookController',
 				  controllerAs: 'subBookController'
+			  },'bookDetails@teacher.standardSubjectBooks' : {
+				  templateUrl: 'src/faculty/standard/bookDetail.html',
+				
 			  },
 			},
 		  })
