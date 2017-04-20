@@ -50,9 +50,13 @@
 				  templateUrl: 'src/faculty/standard/subjectBookTemplate.html',
 				  controller : 'SubjectBookController',
 				  controllerAs: 'subBookController'
-			  },'bookDetails@teacher.standardSubjectBooks' : {
+			  },
+			},
+		  }).state('teacher.standardSubjectBooks.bookDetails', {
+			views: {
+			  'bookDetails@teacher.standardSubjectBooks' : {
 				  templateUrl: 'src/faculty/standard/bookDetail.html',
-				
+
 			  },
 			},
 		  })
