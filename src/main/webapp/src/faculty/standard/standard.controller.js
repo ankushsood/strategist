@@ -94,7 +94,5 @@
 		
 		_this.selectedBookTitle = 'Maths Magic ' + $stateParams.selectedBookId;
 		
-		
-		
 	}
 })();	
