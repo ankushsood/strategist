@@ -53,10 +53,12 @@
 			  },
 			},
 		  }).state('teacher.standardSubjectBooks.bookDetails', {
+			params : {selectedBookId : null},
 			views: {
 			  'bookDetails@teacher.standardSubjectBooks' : {
 				  templateUrl: 'src/faculty/standard/bookDetail.html',
-
+					controller: 'SubjectBookDetailsController',
+					controllerAs: 'subBookDetCtrl'
 			  },
 			},
 		  })

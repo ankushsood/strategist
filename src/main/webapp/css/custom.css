@@ -5413,3 +5413,19 @@ ul.notifications {
 	text-decoration: none;
 	
 }
+
+@media only screen and (max-width: 770px) {
+    .subjectBookHideOnResize {
+        display: none;
+    }
+	
+	.subjectBookShowOnResize {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 770px) {
+    .subjectBookShowOnResize {
+        display:none;
+    }
+}

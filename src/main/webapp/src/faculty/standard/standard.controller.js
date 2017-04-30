@@ -10,14 +10,14 @@
         }
     })
 	.controller('StandardListController', StandardListController)
-	.controller('SubjectBookController', SubjectBookController);
-	
+	.controller('SubjectBookController', SubjectBookController)
+	.controller('SubjectBookDetailsController', SubjectBookDetailsController);
 	
 	StandardListController.$inject=['StandardListService','ModalService', '$location']
 	
 	function StandardListController(StandardListService, ModalService, $location){
 		var _this = this;
-		var standards = StandardListService.getStandardList({facultyId :'f374e8aa444785eb0144478613e80005'}, function(subjects) {
+		var standards = StandardListService.getStandardList({facultyId :'f374e8aa444785eb0144478613e30002'}, function(subjects) {
 				return standards;
 			});
 			
@@ -61,13 +61,15 @@
 
 	}*/
 	
-	SubjectBookController.$inject=['$stateParams', 'SubjectBookService']
-	function SubjectBookController($stateParams, SubjectBookService){
-		
-		
-		console.log('aaaaaaaaaaaaaaaaaa  ' + $stateParams.selectedSubjectId.split('~~')[0]);
+	SubjectBookController.$inject=['$stateParams', 'SubjectBookService', '$location']
+	function SubjectBookController($stateParams, SubjectBookService, $location){
 		var _this = this;
 		_this.subjectData = {} 
+		if($stateParams.selectedSubjectId == undefined || $stateParams.selectedSubjectId == null){
+			$location.url("/home/standards");
+			return;
+			
+		}
 		_this.subjectTitle = $stateParams.selectedSubjectId.split('~~')[0];
 		var books = SubjectBookService.getSubjectBooks({subjectId : $stateParams.selectedSubjectId.split('~~')[1]}, function(books) {
 				return books;
@@ -82,5 +84,17 @@
 			if(!isValid)return false;
 			close(result, 500);
 		};
+	}
+
+	SubjectBookDetailsController.$inject=['$stateParams']
+	function SubjectBookDetailsController($stateParams){
+		var _this = this;
+		 _this.expand = false;
+		console.log('-----------BookId'  + $stateParams.selectedBookId)
+		
+		_this.selectedBookTitle = 'Maths Magic ' + $stateParams.selectedBookId;
+		
+		
+		
 	}
 })();	

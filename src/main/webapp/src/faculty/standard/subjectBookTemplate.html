@@ -1,38 +1,34 @@
-    
-			
-          <div class="row">
-
-            <div class="col-md-12">
-              <div class="x_panel">
-                <div class="x_content">
-					<div class="title_left">
-						  <h3>
-								{{subBookController.subjectTitle}}
-							</h3>
-					</div>
-					<BR/>
-                  <div class="row">
-                    <div class="col-sm-3 mail_list_column">
-                      <div ng-repeat="book in subBookController.subjectBooks"  class="mail_list">
-                        <div class="right">
-                          <h3><a ui-sref="teacher.standardSubjectBooks.bookDetails" >{{book.bookTitle}}</a></h3>
-                          <p>{{book.bookType}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- /MAIL LIST -->
-
-                    <!-- CONTENT MAIL -->
-                    <div ui-view="bookDetails"></div>
+<div class="row">
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="title_left">
+                <h3>{{subBookController.subjectTitle}}</h3>
+                    <button data-placement="top" type="button" class="subjectBookHideOnResize btn btn-info btn-sm" ng-show="true">Add New Book</button>
 					
-                    <!-- /CONTENT MAIL -->
-                  </div>
+					<button ng-click="subBookController.showBookSelection;" data-placement="top" type="button" class="subjectBookShowOnResize btn btn-info btn-sm">Select Different Book</button>
+					
+			</div>
+            <br/>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class=" subjectBookHideOnResize col-sm-3 mail_list_column" ng-hide="subBookController.showBooks">
+                    <div ng-repeat=" book in subBookController.subjectBooks" class="mail_list">
+                        <div class="right">
+							<h3>
+								<a ui-sref="teacher.standardSubjectBooks.bookDetails({selectedBookId : book.bookId})">{{book.bookTitle}}</a>
+							</h3>
+                            <p>{{book.bookType}}</p>
+                            <p>{{book.desc}}</p>
+						</div>
+                    </div>
+				</div>
+                <!-- /MAIL LIST -->
+                <!-- CONTENT MAIL -->
+                <div id="selectedBookDetails" ui-view="bookDetails">
+					No Chapter Selected
                 </div>
-              </div>
+                <!-- /CONTENT MAIL -->
             </div>
-          </div>
-
-				
-				
-				
-				
+        </div>
+    </div>
+</div>
