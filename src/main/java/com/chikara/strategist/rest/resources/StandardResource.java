@@ -44,8 +44,4 @@ public class StandardResource
     	return standards;
     }
 
-
-	
-
-
 }

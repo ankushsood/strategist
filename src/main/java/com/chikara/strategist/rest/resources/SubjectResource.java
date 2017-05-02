@@ -34,12 +34,4 @@ public class SubjectResource
     	return students;
     }
 
-   @GET
-   @Path("/student/{studentUUID}")
-   @Produces(MediaType.APPLICATION_JSON)
-   public Map<String, Object> getStudent(@PathParam("subjectUUID") String subjectUUID){
-	   return subjectDao.getSubjectById(subjectUUID);
-   }
-	
-	
 }

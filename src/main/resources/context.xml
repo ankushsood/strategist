@@ -40,6 +40,8 @@
             <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
             <prop key="hibernate.show_sql">true</prop>
 			<prop key="hibernate.hbm2ddl.auto">update</prop>
+			<prop key = "spring.autoconfigure.exclude">HibernateJpaAutoConfiguration.class</prop>
+			
         </props>
         </property>
     </bean>
@@ -98,6 +100,10 @@
 		</bean>
 	<bean id="bookDao" class="com.chikara.strategist.dao.BookDAO" >
 		</bean>
+
+	<bean id="chapterDao" class="com.chikara.strategist.dao.ChapterDAO" >
+		</bean>
+
 		
 	<bean id="accessTokenDao" class="com.chikara.strategist.dao.accesstoken.JpaAccessTokenDao">
 		</bean>

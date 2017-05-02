@@ -8,4 +8,5 @@ import com.chikara.strategist.entity.Book;
 public interface IBookDao extends Dao<Book, String>{
 
 	List<Map<String, Object>> getBooksForSubject(String subjectId);
+	void saveBookForSubject(String subjectId, Book book);
 }

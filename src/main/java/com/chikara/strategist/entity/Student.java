@@ -23,9 +23,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "STUDENT")
 public class Student  implements com.chikara.strategist.entity.Entity {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -35,16 +33,13 @@ public class Student  implements com.chikara.strategist.entity.Entity {
 	private String id;
 
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "student", fetch = FetchType.LAZY)
-	@JsonManagedReference
 	public List<Subject> subjectList;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student", fetch = FetchType.LAZY)
-	@JsonBackReference
 	public List<Homework> homeworkList;
 	
 	@ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "STANDARD_ID")
-	@JsonBackReference
 	private Standard standard;
 
 	@Column(name = "DATE_OF_BIRTH")

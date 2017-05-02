@@ -3,7 +3,7 @@
         <div class="x_content">
             <div class="title_left">
                 <h3>{{subBookController.subjectTitle}}</h3>
-                    <button data-placement="top" type="button" class="subjectBookHideOnResize btn btn-info btn-sm" ng-show="true">Add New Book</button>
+                    <button data-placement="top" type="button" ng-click="subBookController.showAddBookModal(subBookController.subjectTitle, subBookController.subjectBookService, subBookController.modalViewService, subBookController.subjectId, subBookController)" class="subjectBookHideOnResize btn btn-info btn-sm" ng-show="true">Add New Book</button>
 					
 					<button ng-click="subBookController.showBookSelection;" data-placement="top" type="button" class="subjectBookShowOnResize btn btn-info btn-sm">Select Different Book</button>
 					
@@ -15,10 +15,10 @@
                     <div ng-repeat=" book in subBookController.subjectBooks" class="mail_list">
                         <div class="right">
 							<h3>
-								<a ui-sref="teacher.standardSubjectBooks.bookDetails({selectedBookId : book.bookId})">{{book.bookTitle}}</a>
+								<a ui-sref="teacher.standardSubjectBooks.bookDetails({selectedBookId : book.bookId , selectedBookTitle: book.bookTitle})">{{book.bookTitle}}</a>
 							</h3>
                             <p>{{book.bookType}}</p>
-                            <p>{{book.desc}}</p>
+                            <p>{{book.bookSummary}}</p>
 						</div>
                     </div>
 				</div>

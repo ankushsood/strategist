@@ -53,7 +53,7 @@
 			  },
 			},
 		  }).state('teacher.standardSubjectBooks.bookDetails', {
-			params : {selectedBookId : null},
+			params : {selectedBookId : null, selectedBookTitle: null},
 			views: {
 			  'bookDetails@teacher.standardSubjectBooks' : {
 					templateUrl: 'src/faculty/standard/bookDetail.html',

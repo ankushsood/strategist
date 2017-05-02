@@ -30,7 +30,7 @@ public class JpaDao<T extends Entity, I> implements Dao<T, I>
         return this.entityManager;
     }
 
-    @PersistenceContext(type = PersistenceContextType.TRANSACTION)
+    @PersistenceContext(type = PersistenceContextType.EXTENDED)
     public void setEntityManager(final EntityManager entityManager)
     {
         this.entityManager = entityManager;

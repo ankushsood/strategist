@@ -39,7 +39,6 @@ public class School {
 	private SchoolType schoolType;
 	@OneToMany(cascade= CascadeType.ALL, mappedBy = "school")
 	private List<Standard> standardList = new ArrayList<Standard>();
-	@JsonManagedReference
 	@OneToMany(cascade= CascadeType.ALL, mappedBy = "school")
 	private List<Faculty> facultyList = new ArrayList<Faculty>();
 /*	@OneToMany(cascade= CascadeType.ALL, mappedBy = "school")

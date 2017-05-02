@@ -7,11 +7,10 @@
 	
 	StandardListService.$inject=['$resource']
 	SubjectBookService.$inject=['$resource']
-		
 	
 	function StandardListService($resource) {
 		var service = this;
-		return $resource('rest/standard/getStandardListForFaculty/:facultyId', {facultyId:'@facultyId'},
+		return $resource('/rest/standard/getStandardListForFaculty/:facultyId', {facultyId:'@facultyId'},
 		{
 			getStandardList: {
 				method: 'GET',
@@ -20,18 +19,20 @@
 		});
 	}
 
-
 	function SubjectBookService($resource){
 
 		var service = this;
-		return $resource('rest/book/getBooksForSubject/:subjectId', {subjectId:'@subjectId'},
+		return $resource('/rest/book/:subjectId', {subjectId:'@subjectId'},
 		{
 			getSubjectBooks: {
 				method: 'GET',
 				isArray : true
+			},
+			addSubjectBook:{
+				method:'POST',
+				cache: false,
+				isArray:true
 			}
 		});
-	
-	
 	}	
 })();

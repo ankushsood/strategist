@@ -2,6 +2,7 @@ package com.chikara.strategist.entity;
 
 import java.util.List;
 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonBackReference;
-import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -28,23 +27,19 @@ public class Subject  implements com.chikara.strategist.entity.Entity {
 	@Column(name = "ID", nullable = false)
 	private String id;
 
-	@JsonManagedReference()
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject", fetch = FetchType.LAZY)
 	private List<Book> bookList;
 
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JsonBackReference
 	private List<Student> student;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "FACULTY_ID")
-	@JsonBackReference
 	private Faculty faculty;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "STANDARD_ID")
-	@JsonBackReference
 	private Standard standard;
 
 	@Column(name = "SUBJECT_NAME", nullable = false)
@@ -53,16 +48,13 @@ public class Subject  implements com.chikara.strategist.entity.Entity {
 	@Column(name = "SUBJECT_DESCRIPTION", nullable = false)
 	private String subjectDescription;
 
-	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject", fetch = FetchType.LAZY)
 	private List<Exam> examList;
 	
 	@OneToOne
-	@JsonBackReference
 	private ProjectedProgressPlan projectedProgressPlan;
 	
 	@OneToOne
-	@JsonBackReference
 	private CurrentProgressPlan currentProgressPlan;
 	
 	public String getId() {

@@ -26,7 +26,8 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-		<property name = "spring.autoconfigure.exclude">HibernateJpaAutoConfiguration.class</property>		
+		<property name = "spring.autoconfigure.exclude">HibernateJpaAutoConfiguration.class</property>
+		 		
         <!-- Names the annotated entity class -->
         
         <!-- Names the annotated entity class -->
@@ -37,6 +38,7 @@
 		<mapping class="com.chikara.strategist.entity.Student"/>
 		<mapping class="com.chikara.strategist.entity.Book"/>
 		<mapping class="com.chikara.strategist.entity.Exam"/>
+		<mapping class="com.chikara.strategist.entity.Chapter"/>
 		<mapping class="com.chikara.strategist.entity.ProjectedProgressPlan"/>
 		<mapping class="com.chikara.strategist.entity.CurrentProgressPlan"/>
 		<mapping class="com.chikara.strategist.entity.Homework"/>

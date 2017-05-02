@@ -56,11 +56,9 @@ public class Faculty {
 	@Column(name = "ID", nullable = false)
 	private String id;
 
-	@JsonManagedReference
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "faculty", fetch = FetchType.LAZY)
 	private List<Standard> standardList;
 	
-	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "faculty", fetch = FetchType.LAZY)
 	private List<Subject> subjectList;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "faculty", fetch = FetchType.LAZY)

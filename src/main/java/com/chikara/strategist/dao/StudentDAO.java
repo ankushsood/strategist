@@ -12,6 +12,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.orm.hibernate4.HibernateTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.chikara.strategist.entity.Student;
 
@@ -45,7 +46,7 @@ public class StudentDAO extends JpaDao<Student, String> implements IStudentDao{
 		//String hql = "select * from Student where class_id";
 	}
 	
-	//@Transactional(readOnly = true)
+	@Transactional(readOnly = true)
 	public Map<String, Object> getStudentById(String studentUUID) {
 		
 		TypedQuery<Map> query = getEntityManager().createQuery(GET_STUDENT_DETAILS, Map.class);
@@ -75,7 +76,7 @@ public class StudentDAO extends JpaDao<Student, String> implements IStudentDao{
 	}
 	
 	@SuppressWarnings("unchecked")
-	//@Transactional(readOnly = true)
+	@Transactional(readOnly = true)
 	public List<Map<String, Object>> getStudentsList(){
 		Query query2 = getEntityManager().createQuery(GET_STUDENT_LIST);
 		return query2.getResultList();

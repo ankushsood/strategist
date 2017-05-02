@@ -13,7 +13,7 @@ public interface ISubjectDao extends Dao<Subject, String>
 	
 	List<Map<String, Object>> getSubjectList();
 	
-	Map<String, Object> getSubjectById(String subjectUUID);
+	Subject getSubjectById(String subjectUUID);
 	
 	List<Map<String, Object>> getSubjectByStandard(String standardId);
 

@@ -25,7 +25,6 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.chikara.strategist.constants.SubjectStream;
-import org.codehaus.jackson.annotate.JsonManagedReference;
 
 @Entity
 @Table(name = "STANDARD", uniqueConstraints = { @UniqueConstraint(columnNames = {
@@ -42,11 +41,9 @@ public class Standard implements com.chikara.strategist.entity.Entity {
 	@JoinColumn(name = "SCHOOL_ID")
 	private School school;
 	
-	@JsonManagedReference
 	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "standard", fetch = FetchType.LAZY)
 	List<Subject> subjectList = new ArrayList<Subject>();
 	
-	@JsonManagedReference
 	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "standard", fetch = FetchType.LAZY)
 	List<Student> studentList = new ArrayList<Student>();
 

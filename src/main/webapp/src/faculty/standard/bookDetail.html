@@ -4,70 +4,44 @@
 							<div class="col-md-8">
 								<div class="compose-btn">
 									<p>Chapter Summary for book {{subBookDetCtrl.selectedBookTitle}}</p> 
-									<button data-placement="top" type="button" class="btn btn-info btn-sm"> Add Chapter</button>
+									<button data-placement="top" type="button" class="btn btn-info btn-sm" ng-click="subBookDetCtrl.ShowAddChapterModal(subBookDetCtrl.selectedSubjectId, subBookDetCtrl.ModalService, subBookDetCtrl.selectedBookId, subBookDetCtrl.selectedBookTitle)"> Add Chapter</button>
 								</div>
 							</div>
 							<div class="clearfix"/>
 							<div class="clearfix"/>
 						</div>
                         <div class="view-mail">
-							<v-accordion  class="vAccordion--default" >
-								<v-pane ng-repeat="book in subBookController.subjectBooks" >
-									<v-pane-header>
-										<div>
-										
-											<p ng-click="subBookDetCtrl.expand = !subBookDetCtrl.expand"><i ng-class="subBookDetCtrl.expand ? 'fa fa-minus': 'fa fa-plus'"/> {{::book.bookTitle}}</p>
+							
+				
+							<div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+								<div class="panel" ng-repeat="book in subBookController.subjectBooks">
+									<a class="panel-heading collapsed" style=''role="tab" id="{{book.bookTitle}}"  href ng-click="subBookDetCtrl.showHideAccordian(subBookController.subjectBooks.length, $index)" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" aria-controls="{{book.bookTitle}}">
+										<h4 class="panel-title">{{book.bookTitle}}</h4>
+									</a>
+									<div id="{{$index}}" class="panel-collapse collapse in" style='display:none;' role="tabpanel" aria-labelledby="{{book.bookTitle}}">
+										<div class="panel-body">
+											<div>
+												<p>{{book.bookSummary}}</p>
+											</div>
+											<div>
+												<p>{{book.bookSummary}}</p>
+											</div>
+											<div>
+												<p>{{book.bookSummary}}</p>
+											</div>
+											<div>
+												<p>{{book.bookSummary}}</p>
+											</div>
+											<div>
+												<p>{{book.bookSummary}}</p>
+											</div>
 										</div>
-									</v-pane-header>
-									<v-pane-content>
-										<div>
-											<p>{{::book.bookType}}</p>
-										</div>
-										<div>
-											<p>{{::book.bookType}}</p>
-										</div>
-										<div>
-											<p>{{::book.bookType}}</p>
-										</div>
-										<div>
-											<p>{{::book.bookType}}</p>
-										</div>
-										<div>
-											<p>{{::book.bookType}}</p>
-										</div>
-										<div>
-											<p>{{::book.bookType}}</p>
-										</div>
-										<div>
-											<p>{{::book.bookType}}</p>
-										</div>
-										<div>
-											<p>{{::book.bookType}}</p>
-										</div>
-										<div>
-											<p>{{::book.bookType}}</p>
-										</div>
-										<div>
-											<p>{{::book.bookType}}</p>
-										</div>
-										<div>
-											<p>{{::book.bookType}}</p>
-										</div>
-										<div>
-											<p>{{::book.bookType}}</p>
-										</div>
-										<div>
-											<p>{{::book.bookType}}</p>
-										</div>
-									</v-pane-content>
-								</v-pane>
-							</v-accordion>
-                        </div>
-
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-					
-					
 					
 					
 					

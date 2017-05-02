@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.chikara.strategist.entity.Standard;
+import com.chikara.strategist.entity.Subject;
 
 @Repository
 public class StandardDAO extends JpaDao<Standard, String> implements IStandardDao{
@@ -66,7 +67,11 @@ public class StandardDAO extends JpaDao<Standard, String> implements IStandardDa
 		return facultyStandardList;		
 	}
 
-
+	@Override
+	public Subject getSubjectById(String id) {
+		return getEntityManager().find(Subject.class, id);
+		
+	}
 	/*public void deleteStandard(String standardId) {
 		Object record = hibernateTemplate.load(Standard.class, standardId);
 		hibernateTemplate.delete(record);

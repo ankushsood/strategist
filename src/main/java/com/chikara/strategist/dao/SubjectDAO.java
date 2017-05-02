@@ -32,8 +32,8 @@ public class SubjectDAO extends JpaDao<Subject, String> implements ISubjectDao{
 	}
 	
 	@Override
-	public Map<String, Object> getSubjectById(String subjectUUID) {
+	public Subject getSubjectById(String id) {
+		return getEntityManager().find(Subject.class, id);
 		
-		return null;
 	}
 }
