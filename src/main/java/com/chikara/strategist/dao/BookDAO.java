@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.chikara.strategist.entity.Book;
@@ -35,6 +36,7 @@ public class BookDAO extends JpaDao<Book, String> implements IBookDao {
 
 	
 	@Override
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void saveBookForSubject(String subjectId, Book book) {
 		book.setSubject(getEntityManager().find(Subject.class, subjectId));
 		save(book);

@@ -17,24 +17,12 @@ angular.module('faculty').controller('FacultyHeaderCotroller', FacultyHeaderCotr
 	
 	}
 	function FacultyHeaderCotroller($location, $cookieStore){
-
-
-		console.log('-------------------------------');
-		
 		var this_ = this;
-		
 		this_.sss = 'asdfasfasf';
 		this_.logout = function(){
-			console.log('~~~~~~~~~~~~~~' + $cookieStore.get('accessToken'));
-			
-			
 			$cookieStore.remove('accessToken');
 			$cookieStore.remove('user');
 			$location.path("/");
-			console.log('~~~~~~~~~~~~~~' + $cookieStore.get('accessToken'));
-
-			}
+		}
 	}
-	
-		
 })();

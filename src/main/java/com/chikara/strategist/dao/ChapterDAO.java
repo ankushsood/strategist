@@ -12,13 +12,18 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.orm.hibernate4.HibernateTemplate;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.chikara.strategist.entity.Book;
 import com.chikara.strategist.entity.Chapter;
 import com.chikara.strategist.entity.Student;
+import com.chikara.strategist.entity.Subject;
 
-public class ChapterDAO extends JpaDao<Chapter, String> {
-	
+public class ChapterDAO extends JpaDao<Chapter, String>  implements IChapterDao{
+
+	private String GET_BOOK_CHAPTERS = "SELECT new map(c.id as chapterId, c.chapterTitle as title, c.chapterSummary as summary, b.bookTitle as bookTitle, c.chapterJSON as chapterJSON) from Chapter c JOIN c.book b WHERE c.book.id = :bookId"; 
+
 	public ChapterDAO() {
 		super(Chapter.class);
 	}
@@ -33,48 +38,42 @@ public class ChapterDAO extends JpaDao<Chapter, String> {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		hibernateTemplate = new HibernateTemplate(sessionFactory);
 	}
+
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Map<String, Object>> getChaptersForBook(String bookId) {
 	
-	
-	public void deleteStudent(String id){
-		Object record = hibernateTemplate.load(Student.class, id);
-		hibernateTemplate.delete(record);
-	}
-	
-	public Student saveStudent(Student student){
-		hibernateTemplate.save(student);
-		return student;
-	}
-	
-	public Student updateStudent(Student student){
-		hibernateTemplate.update(student);
-		return student;
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Transactional(readOnly = true)
-	public List<Map<String, Object>> getChapterList(String bookId){
-		Query query2 = getEntityManager().createQuery("");
+		Query query2 = getEntityManager().createQuery(GET_BOOK_CHAPTERS);
+		query2.setParameter("bookId", bookId);
 		return query2.getResultList();
+		
 	}
+
 
 	@Override
-	public Chapter find(String id) {
-		return null;
+	@Transactional(propagation=Propagation.REQUIRED)
+	public void saveChapter(String bookId, Chapter chapter) {
+		
+		chapter.setBook(getEntityManager().find(Book.class, bookId));
+		save(chapter);
+		
+		
 	}
+
 
 	@Override
-	public Chapter save(Chapter entity) {
-		return null;
+	@Transactional(propagation=Propagation.REQUIRED)
+	public void editChapter(String bookId, Chapter chapter) {
+		Chapter dbChapter = getEntityManager().find(this.entityClass, chapter.getId());
+		dbChapter.setChapterSummary(chapter.getChapterSummary());
+		dbChapter.setChapterTitle(chapter.getChapterTitle());
 	}
+
 
 	@Override
-	public void delete(String id) {
-		//hibernateTemplate.d
+	public void deleteChapter(String chapterId) {
+		// TODO Auto-generated method stub
+		
 	}
-
-	@Override
-	public void delete(Chapter entity) {
-		hibernateTemplate.delete(entity);
-	}
-
 }

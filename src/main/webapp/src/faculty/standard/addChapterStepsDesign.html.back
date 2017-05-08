@@ -1,0 +1,171 @@
+	<div class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" ng-click="addChapterController.close(false,{})" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Add New Chapter</h4>
+				</div>
+				<div class="form_wizard wizard_horizontal">
+					<ul class="wizard_steps anchor" style='padding-left:0;padding-top:10px;'>
+					  <li>
+						<a ng-class="{'selected':addChapterController.isCurrentStep(0), 'done': !addChapterController.isCurrentStep(0)}" ng-click="addChapterController.setCurrentStep(0)" href >
+						  <span class="step_no">1</span>
+						  <span class="step_descr">
+							<small>Add<br />Chapter</small>
+						  </span>
+						</a>
+					  </li>
+					  <li>
+						<a  ng-class="{'selected':addChapterController.isCurrentStep(1), 'done': !addChapterController.isCurrentStep(1)}" ng-click="addChapterController.setCurrentStep(1)" href >
+						  <span class="step_no">2</span>
+						  <span class="step_descr">
+							<small>Add<br />Sections</small>
+						  </span>
+						</a>
+					  </li>
+					  <li>
+						<a  ng-class="{'selected':addChapterController.isCurrentStep(2), 'done': !addChapterController.isCurrentStep(2)}" ng-click="addChapterController.setCurrentStep(2)" href >
+						  <span class="step_no">3</span>
+						  <span class="step_descr">
+							<small>Add<br />Questions</small>
+						  </span>
+						 </a>
+					  </li>
+					  <li>
+						<a  ng-class="{'selected':addChapterController.isCurrentStep(3), 'done': !addChapterController.isCurrentStep(3)}" ng-click="addChapterController.setCurrentStep(3)" href >
+						  <span class="step_no">4</span>
+						  <span class="step_descr">
+							<small>Review</small>
+						  </span>
+						 </a>
+					  </li>
+					</ul>
+				</div>
+				<form name="addChapterControllerForm" novalidate> 
+					<div ng-switch="addChapterController.getCurrentStep()" class="slide-frame">
+						<div ng-switch-when="one" class="wave">
+							<div class="x_content">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Title <span class="required">*</span></label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<input name = "title" ng-required="true" type="text" data-ng-model="addChapterController.bookDetails.title" class="form-control col-md-8 col-xs-13"/>
+									<p ng-show="addChapterControllerForm.title.$error.required" class="error">Please Enter Chapter Title</p>
+								</div>
+								<div class="clearfix"></div>
+								<br />
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Chapter Summary <span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<textarea type="text" ng-required="true"  data-ng-model="addChapterController.bookDetails.summary" class="form-control col-md-8 col-xs-13" name= "description">
+									</textarea>
+									<p ng-show="addChapterControllerForm.description.$error.required" class="error">Please Enter Book Summary</p>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<div style='float:right;margin:15px;'>
+								<button class="btn btn-primary" ng-disabled="addChapterControllerForm.$invalid" ng-click="addChapterController.handleNext(addChapterController.bookDetails)">Add Sections and Questions &nbsp;<span class="glyphicon glyphicon-menu-right" aria-hidden="true" style='top:2px;'></span></button>
+							</div>
+						</div>
+						<div ng-switch-when="two" class="wave">
+							<div class="x_content">
+								
+								<button class="right btn btn-primary btn-sm" ng-click="addChapterController.addForm(0)">Add Section &nbsp;<span class="glyphicon glyphicon-plus" aria-hidden="true" style='top:2px;'></span></button>
+								<div class="clearfix"></div>
+								
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Title <span class="required">*</span></label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<input name = "title" ng-required="true" type="text" data-ng-model="addChapterController.bookDetails.sectionTitle" class="form-control col-md-8 col-xs-13"/>
+									<p ng-show="addChapterControllerForm.title.$error.required" class="error">Please Enter Chapter Title</p>
+								</div>
+								<div class="clearfix"></div>
+								
+								
+								
+								<h4>Prevent drop on the entire tree</h4>
+<div class="row">
+  <div class="col-sm-6">
+    <div ui-tree id="tree-root" data-nodrop-enabled="true">
+      <ol ui-tree-nodes ng-model="addChapterController.data">
+        <li ng-repeat="node in addChapterController.data" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+      </ol>
+    </div>
+  </div>
+
+</div>
+
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+							</div>
+							<div class="clearfix"></div>
+							<div style='float:right;margin:15px;'>
+								<button class="btn btn-primary" ng-disabled="addChapterControllerForm.$invalid" ng-click="addChapterController.handleNext(addChapterController.bookDetails)">Add Sections and Questions &nbsp;<span class="glyphicon glyphicon-menu-right" aria-hidden="true" style='top:2px;'></span></button>
+							</div>
+						</div>
+						<div ng-switch-when="three" class="wave">
+							<div class="x_content">
+								<h5 class="control-label col-md-12"><b>Add Questions</b></h5>
+								</br>
+								<div class="clearfix"></div>
+								
+							</div>
+							<div class="clearfix"></div>
+							<div style='float:right;margin:15px;'>
+								<button class="btn btn-primary" ng-disabled="addChapterControllerForm.$invalid" ng-click="addChapterController.handleNext(addChapterController.bookDetails)">Add Sections and Questions &nbsp;<span class="glyphicon glyphicon-menu-right" aria-hidden="true" style='top:2px;'></span></button>
+							</div>
+						</div>
+						<div ng-switch-when="four" class="wave">
+							<div class="x_content">
+								<h5 class="control-label col-md-12"><b>Review and Submit</b></h5>
+								</br>
+								<div class="clearfix"></div>
+								
+							</div>
+							<div class="clearfix"></div>
+							<div style='float:right;margin:15px;'>
+								<button class="btn btn-primary" ng-disabled="addChapterControllerForm.$invalid" ng-click="addChapterController.handleNext(addChapterController.bookDetails)">Add Sections and Questions &nbsp;<span class="glyphicon glyphicon-menu-right" aria-hidden="true" style='top:2px;'></span></button>
+							</div>
+						</div>
+					</div>
+				</form>
+		
+				
+			</div>
+        </div>
+	
+
+
+
+<script type="text/ng-template" id="nodes_renderer.html">
+  <div ui-tree-handle class="tree-node tree-node-content">
+    <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="addChapterController.toggle(this)"><span
+        class="glyphicon"
+        ng-class="{
+          'glyphicon-chevron-right': collapsed,
+          'glyphicon-chevron-down': !collapsed
+        }"></span></a>
+    {{node.title}}
+    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="addChapterController.remove(this)"><span
+        class="glyphicon glyphicon-remove"></span></a>
+    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="addChapterController.newSubItem(this)" style="margin-right: 8px;"><span
+        class="glyphicon glyphicon-plus"></span></a>
+  </div>
+  <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+    </li>
+  </ol>
+</script>
+
+	
+		
+	</div>
+	
+	
+

@@ -104,4 +104,12 @@ public class Chapter implements com.chikara.strategist.entity.Entity {
 		this.updated = updated;
 	}
 	
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
 }
