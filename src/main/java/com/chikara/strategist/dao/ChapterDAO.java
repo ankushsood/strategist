@@ -54,7 +54,7 @@ public class ChapterDAO extends JpaDao<Chapter, String>  implements IChapterDao{
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED)
 	public void saveChapter(String bookId, Chapter chapter) {
-		
+		System.out.println(chapter);
 		chapter.setBook(getEntityManager().find(Book.class, bookId));
 		save(chapter);
 		
@@ -68,12 +68,10 @@ public class ChapterDAO extends JpaDao<Chapter, String>  implements IChapterDao{
 		Chapter dbChapter = getEntityManager().find(this.entityClass, chapter.getId());
 		dbChapter.setChapterSummary(chapter.getChapterSummary());
 		dbChapter.setChapterTitle(chapter.getChapterTitle());
+		dbChapter.setChapterJSON(chapter.getChapterJSON());
 	}
-
 
 	@Override
 	public void deleteChapter(String chapterId) {
-		// TODO Auto-generated method stub
-		
 	}
 }

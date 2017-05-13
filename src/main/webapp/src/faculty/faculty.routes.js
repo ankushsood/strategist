@@ -47,7 +47,7 @@
 			params : {selectedSubjectId : null},
 			views: {
 			  'detail@teacher' : {
-				  templateUrl: 'src/faculty/standard/subjectBookTemplate.html',
+				  templateUrl: 'src/faculty/standard/updateCourse/subjectBookTemplate.html',
 				  controller : 'SubjectBookController',
 				  controllerAs: 'subBookController'
 			  },
@@ -56,9 +56,18 @@
 			params : {selectedBookId : null, selectedBookTitle: null},
 			views: {
 			  'bookDetails@teacher.standardSubjectBooks' : {
-					templateUrl: 'src/faculty/standard/bookDetail.html',
+					templateUrl: 'src/faculty/standard/updateCourse/bookDetail.html',
 					controller: 'SubjectBookDetailsController',
 					controllerAs: 'subBookDetCtrl'
+			  },
+			},
+		  }).state('teacher.assignHomework', {
+			url: '/standard/assignHomework',
+			views: {
+			  'detail@teacher' : {
+				  templateUrl: 'src/faculty/standard/assignHomework.html',
+				  controller : 'AssignHomeworkController',
+				  controllerAs: 'assignHomeworkController'
 			  },
 			},
 		  })

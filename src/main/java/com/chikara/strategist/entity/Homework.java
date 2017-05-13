@@ -29,9 +29,13 @@ public class Homework {
 	@Column(name="_ID")
 	private String id;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	/*@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="STUDENT_ID", nullable=false)
-	private Student student;
+	private Student student;*/
+	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name="STANDARD_ID", nullable=false)
+	private Standard standard;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="FACULTY_ID", nullable=false)
@@ -115,6 +119,14 @@ public class Homework {
 		public Date getUpdateDate() {
 			return updateDate;
 		}
+		
+		public Standard getStandard() {
+			return standard;
+		}
+		public void setStandard(Standard standard) {
+			this.standard = standard;
+		}
+		
 		@PrePersist
 		public void onCreate(){
 			updateDate = createDate = new Date();
@@ -123,12 +135,12 @@ public class Homework {
 		public void onUpdate(){
 			updateDate = new Date();
 		}
-		public void setStudent(Student student) {
+		/*public void setStudent(Student student) {
 			this.student = student;
 		}
 		public Student getStudent() {
 			return student;
-		}
+		}*/
 		public void setFaculty(Faculty faculty) {
 			this.faculty = faculty;
 		}

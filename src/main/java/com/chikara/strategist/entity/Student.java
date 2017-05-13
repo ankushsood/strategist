@@ -35,8 +35,8 @@ public class Student  implements com.chikara.strategist.entity.Entity {
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "student", fetch = FetchType.LAZY)
 	public List<Subject> subjectList;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student", fetch = FetchType.LAZY)
-	public List<Homework> homeworkList;
+/*	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student", fetch = FetchType.LAZY)
+	public List<Homework> homeworkList;*/
 	
 	@ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "STANDARD_ID")
@@ -161,13 +161,13 @@ public class Student  implements com.chikara.strategist.entity.Entity {
 		this.subjectList = subjectList;
 	}
 
-	public List<Homework> getHomeworkList() {
+/*	public List<Homework> getHomeworkList() {
 		return homeworkList;
 	}
 
 	public void setHomeworkList(List<Homework> homeworkList) {
 		this.homeworkList = homeworkList;
-	}
+	}*/
 
 	public void setStandard(Standard standard) {
 		this.standard = standard;

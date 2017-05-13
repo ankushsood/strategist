@@ -30,7 +30,7 @@
 									
 									<span ng-repeat="sta in standard.subjectTitleList.split(',')">
 									
-									<a href ui-sref="teacher.standardSubjectBooks({selectedSubjectId: sta})" >{{sta.split('~~')[0]}}</a>,</span>
+									<a href ui-sref="teacher.standardCoursePlan({selectedSubjectId: sta})" >{{sta.split('~~')[0]}}</a>,</span>
 								</li>
 
 								
@@ -41,9 +41,9 @@
                         </div>
                         <div class="col-xs-12 bottom text-center">
 							<a ui-sref="home.viewstandardDetails({standardId: standard.id})" class="text-right"> <span class="btn btn-info btn-sm" style="width:110px;padding:5px;">Mark Attendence</span></a>
-<a ui-sref="home.viewstandardDetails({standardId: standard.id})" class="text-left"> <span class="btn btn-info btn-sm" style="width:110px;padding:5px;">Assign Homework</span></a>
-<a ui-sref="home.viewstandardDetails({standardId: standard.id})" class="text-right" > <span class="btn btn-info btn-sm" style="width:110px;;padding:5px;">Prepare Result</span></a>
-<a ui-sref="home.viewstandardDetails({standardId: standard.id})" class="text-left" > <span class="btn btn-info btn-sm" style="width:110px;padding:5px;">Announcement</span></a>
+							<a ng-click="standardListCtrl.showUpdateSubjectModal(standard.subjectTitleList)" class="text-left"> <span class="btn btn-info btn-sm" style="width:110px;padding:5px;">Update Course</span></a>
+							<a ui-sref="home.viewstandardDetails({standardId: standard.id})" class="text-right" > <span class="btn btn-info btn-sm" style="width:110px;;padding:5px;">Prepare Result</span></a>
+							<a ui-sref="home.viewstandardDetails({standardId: standard.id})" class="text-left" > <span class="btn btn-info btn-sm" style="width:110px;padding:5px;">Announcement</span></a>
 
                         </div>
                       </div>

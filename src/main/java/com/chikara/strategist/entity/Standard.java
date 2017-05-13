@@ -47,6 +47,9 @@ public class Standard implements com.chikara.strategist.entity.Entity {
 	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "standard", fetch = FetchType.LAZY)
 	List<Student> studentList = new ArrayList<Student>();
 
+	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "standard", fetch = FetchType.LAZY)
+	List<Homework> homeworkList = new ArrayList<Homework>();
+
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	private List<Faculty> faculty;
 	@Column(name = "remarks", length = 3000)

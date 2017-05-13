@@ -5568,3 +5568,12 @@ tr.angular-ui-tree-empty {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+.sectionQuestion{
+	
+	background-color: #ECEFF1;
+}
+
+.chapterSection{
+	
+	background-color:#F5F5F5;
+}

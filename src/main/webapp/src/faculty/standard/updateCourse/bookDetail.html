@@ -39,7 +39,7 @@
 								<div class="col-xl-12">
 									<div ui-tree id="tree-root" data-nodrop-enabled="true" ng-if="subBookDetCtrl.data[chapter.chapterId].length > 0">
 										<ol ui-tree-nodes ng-model="subBookDetCtrl.data[chapter.chapterId]">
-											<li ng-if="subBookDetCtrl.data[chapter.chapterId].length > 0" ng-repeat="node in subBookDetCtrl.data[chapter.chapterId]" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+											<li ng-if="subBookDetCtrl.data[chapter.chapterId].length > 0" ng-repeat="node in subBookDetCtrl.data[chapter.chapterId] track by $index" ui-tree-node ng-include="'nodes_renderer.html'"></li>
 										</ol>
 									</div>
 								</div>
@@ -52,7 +52,7 @@
 	</div>
 	
 	<script type="text/ng-template" id="nodes_renderer.html">
-		<div ui-tree-handle class="tree-node tree-node-content row" data-nodrag>
+		<div ui-tree-handle ng-class="{'sectionQuestion': node.isQuestion, 'chapterSection': !node.isQuestion }" class="tree-node tree-node-content row" data-nodrag>
 			
 			
 			<div ng-if="node.isQuestion == true" id='questionTitle' class="col-md-7" style='word-wrap:break-word;'>
@@ -63,7 +63,7 @@
 				  'glyphicon-chevron-down': !collapsed
 				}"></span></a>
 			
-				{{node.title | decode}}
+				<div id="{{node.id}}"> {{(node.id + '_' + node.sectionNumber + '_' + node.title) | decode}}</div>
 			</div>
 
 			<div ng-if="node.isQuestion == false" id='sectionTitle' class="col-md-7" style='word-wrap:break-word;'>
@@ -76,7 +76,7 @@
 			{{node.sectionNumber}} {{node.title}}</div>
 			
 			<div class="">	
-			<a class="pull-right btn btn-app btn-xs"  data-nodrag ng-click="subBookDetCtrl.remove(this)"><span
+			<a class="pull-right btn btn-app btn-xs"  data-nodrag ng-click="subBookDetCtrl.remove(this, chapter)"><span
 				class="glyphicon glyphicon-remove" style='font-size:12px' ></span></a>
 			<a  class="pull-right btn btn-app btn-xs"  data-nodrag ng-click="subBookDetCtrl.newSubItem(this, chapter)" style="margin-right: 8px;"><span
 				class="glyphicon glyphicon-plus" style='font-size:12px' ></span></a>
