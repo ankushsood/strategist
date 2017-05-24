@@ -1,0 +1,99 @@
+<div class="mail_view col-md-9 col-sm-12 col-xs-12">
+	<div class="inbox-body">
+		<div class="mail_heading row"  ng-if="subBookDetCtrl.bookChapters.length > 0">
+			<div class="col-md-8">
+				<div class="compose-btn">
+					<p>{{subBookDetCtrl.selectedBookTitle}} Chapter Summary</p> 
+					<button data-placement="top" type="button" class="btn btn-info btn-sm" ng-click="subBookDetCtrl.ShowAddChapterModal(subBookDetCtrl.BookChapterService, subBookDetCtrl.ModalService, subBookDetCtrl.selectedBookId, subBookDetCtrl, {})"> Add Chapter</button>
+				</div>
+			</div>
+			<div class="clearfix"/>
+			<div class="clearfix"/>
+		</div>
+		<div class="view-mail">
+			<div ng-if="subBookDetCtrl.bookChapters.length == 0">
+				<br/> No Chapters in selected Book. Try adding chapters to the book {{subBookDetCtrl.selectedBookTitle}} 
+				<button data-placement="top" type="button" class="btn btn-info btn-sm" ng-click="subBookDetCtrl.ShowAddChapterModal(subBookDetCtrl.BookChapterService, subBookDetCtrl.ModalService, subBookDetCtrl.selectedBookId, subBookDetCtrl, {})"> Add Chapter</button>
+
+			</div>
+			<div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+				<div class="panel" ng-repeat="chapter in subBookDetCtrl.bookChapters">
+					<div class='panel-heading'>
+						<a class="collapsed" role="tab" id="{{chapter.title}}"  href 
+						ng-click="subBookDetCtrl.showHideAccordian(subBookDetCtrl.bookChapters.length, $index)" 
+						data-toggle="collapse" data-parent="#accordion" aria-expanded="false" aria-controls="{{chapter.title}}">
+							<h4 style='display:inline-block;word-break: break-word !important;word-wrap: break-word !important;width: 40%;' class="panel-title">{{chapter.title}}</h4>
+						</a>
+						<a class="right btn btn-app" ng-click="subBookDetCtrl.newItem(chapter)" >
+							<i class="fa fa-plus"></i>Add Section
+						</a>
+						<a class="right btn btn-app" >
+							<i class="fa fa-edit" href ng-click="subBookDetCtrl.ShowAddChapterModal(subBookDetCtrl.BookChapterService, subBookDetCtrl.ModalService, subBookDetCtrl.selectedBookId, subBookDetCtrl, chapter)"></i>Edit Chapter
+						</a>
+					</div>
+					<div id="{{$index}}" class="panel-collapse collapse in" style='display:none;' 
+					role="tabpanel" aria-labelledby="{{chapter.title}}">
+						<div class="panel-body">
+							{{chapter.summary}}
+							<div class="row">
+								<div class="col-xl-12">
+									<div ui-tree id="tree-root" data-nodrop-enabled="true" ng-if="subBookDetCtrl.data[chapter.chapterId].length > 0">
+										<ol ui-tree-nodes ng-model="subBookDetCtrl.data[chapter.chapterId]">
+											<li ng-if="subBookDetCtrl.data[chapter.chapterId].length > 0" ng-repeat="node in subBookDetCtrl.data[chapter.chapterId] track by $index" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+										</ol>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/ng-template" id="nodes_renderer.html">
+		<div ui-tree-handle ng-class="{'sectionQuestion': node.isQuestion, 'chapterSection': !node.isQuestion }" class="tree-node tree-node-content row" data-nodrag>
+			
+			
+			<div ng-if="node.isQuestion == true" id='questionTitle' class="col-md-7" style='word-wrap:break-word;'>
+			<a class="btn btn-app btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="subBookDetCtrl.toggle(this)"><span style='font-size:12px'
+				class="glyphicon"
+				ng-class="{
+				  'glyphicon-chevron-right': collapsed,
+				  'glyphicon-chevron-down': !collapsed
+				}"></span></a>
+			
+				<div id="{{node.id}}"> {{(node.id + '_' + node.sectionNumber + '_' + node.title) | decode}}</div>
+			</div>
+
+			<div ng-if="node.isQuestion == false" id='sectionTitle' class="col-md-7" style='word-wrap:break-word;'>
+			<a class="btn btn-app btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="subBookDetCtrl.toggle(this)"><span style='font-size:12px'
+				class="glyphicon"
+				ng-class="{
+				  'glyphicon-chevron-right': collapsed,
+				  'glyphicon-chevron-down': !collapsed
+				}"></span></a>
+			{{node.sectionNumber}} {{node.title}}</div>
+			
+			<div class="">	
+			<a class="pull-right btn btn-app btn-xs"  data-nodrag ng-click="subBookDetCtrl.remove(this, chapter)"><span
+				class="glyphicon glyphicon-remove" style='font-size:12px' ></span></a>
+			<a  class="pull-right btn btn-app btn-xs"  data-nodrag ng-click="subBookDetCtrl.newSubItem(this, chapter)" style="margin-right: 8px;"><span
+				class="glyphicon glyphicon-plus" style='font-size:12px' ></span></a>
+			<a  class="pull-right btn btn-app btn-xs" data-nodrag ng-click="subBookDetCtrl.newQuestion(this, chapter)" style="margin-right: 8px;"><span
+				class="glyphicon glyphicon-question-sign" style='font-size:12px' ></span></a>	
+			</div>
+			
+			
+		</div>
+		<ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+			<li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+			</li>
+		</ol>
+	</script>
+
+
+</div>
+					
+					
+					

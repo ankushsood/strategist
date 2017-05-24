@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="title_left">
+                <h3>{{standardCourseSchedulePlanController.selectedSubjectTitle}}</h3>
+			</div>
+            <br/>
+            <div class="clearfix"></div>
+            <div class="row">
+					  <div class="row">
+
+						<div class="col-md-6 text-center">
+						  <div class="btn-group">
+
+							<button
+							  class="btn btn-primary"
+							  mwl-date-modifier
+							  date="standardCourseSchedulePlanController.viewDate"
+							  decrement="standardCourseSchedulePlanController.calendarView"
+							  ng-click="standardCourseSchedulePlanController.cellIsOpen = false">
+							  Previous
+							</button>
+							<button
+							  class="btn btn-default"
+							  mwl-date-modifier
+							  date="standardCourseSchedulePlanController.viewDate"
+							  set-to-today
+							  ng-click="standardCourseSchedulePlanController.cellIsOpen = false">
+							  Today
+							</button>
+							<button
+							  class="btn btn-primary"
+							  mwl-date-modifier
+							  date="standardCourseSchedulePlanController.viewDate"
+							  increment="standardCourseSchedulePlanController.calendarView"
+							  ng-click="standardCourseSchedulePlanController.cellIsOpen = false">
+							  Next
+							</button>
+						  </div>
+						</div>
+
+						<div class='clearfix'/>
+						<h2 class="text-center">{{ standardCourseSchedulePlanController.calendarTitle }}</h2>
+						
+						<div class="col-md-6 text-center">
+						  <div class="btn-group">
+							<label class="btn btn-primary" ng-model="standardCourseSchedulePlanController.calendarView" uib-btn-radio="'year'" ng-click="standardCourseSchedulePlanController.cellIsOpen = false">Year</label>
+							<label class="btn btn-primary" ng-model="standardCourseSchedulePlanController.calendarView" uib-btn-radio="'month'" ng-click="standardCourseSchedulePlanController.cellIsOpen = false">Month</label>
+							<label class="btn btn-primary" ng-model="standardCourseSchedulePlanController.calendarView" uib-btn-radio="'week'" ng-click="standardCourseSchedulePlanController.cellIsOpen = false">Week</label>
+							<label class="btn btn-primary" ng-model="standardCourseSchedulePlanController.calendarView" uib-btn-radio="'day'" ng-click="standardCourseSchedulePlanController.cellIsOpen = false">Day</label>
+						  </div>
+						</div>
+
+					  </div>
+
+					  <br>
+
+					  <mwl-calendar
+						cell-childController="standardCourseSchedulePlanController.addEvent()"
+						events="standardCourseSchedulePlanController.events"
+						view="standardCourseSchedulePlanController.calendarView"
+						view-title="standardCourseSchedulePlanController.calendarTitle"
+						view-date="standardCourseSchedulePlanController.viewDate"
+						on-event-click="standardCourseSchedulePlanController.eventClicked(calendarEvent)"
+						on-event-times-changed="standardCourseSchedulePlanController.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
+						cell-is-open="standardCourseSchedulePlanController.cellIsOpen"
+						day-view-start="06:00"
+						day-view-end="22:59"
+						day-view-split="30"
+						cell-modifier="standardCourseSchedulePlanController.modifyCell(calendarCell)"
+						cell-auto-open-disabled="false"
+						on-timespan-click="standardCourseSchedulePlanController.timespanClicked(calendarDate, calendarCell)">
+					  </mwl-calendar>
+					</div>
+			</div>
+        </div>
+    </div>
+</div>
+	

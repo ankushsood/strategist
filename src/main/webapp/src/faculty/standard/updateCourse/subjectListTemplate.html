@@ -1,0 +1,27 @@
+	<div class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" ng-click="selectSubjectController.close(true,{})" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Select Subject</h4>
+				</div>
+				<div>
+					<form name="selectSubjectController" novalidate> 
+						<div class="x_content">
+							</br>					
+							<ul class="list-unstyled">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" ng-repeat="subject in selectSubjectController.subjectList.split(',')">
+									<span>
+										<a href ui-sref="teacher.standardSubjectBooks({selectedSubjectId: subject})" data-dismiss="modal" aria-hidden="true">{{subject.split('~~')[0]}}</a>
+									</span>
+								</label>
+							</ul>
+						</div>
+						<div class="clearfix"></div>
+						<div style='float:right;margin:15px;'>
+						</div>
+					</form>
+				</div>
+			</div>
+        </div>
+	</div>

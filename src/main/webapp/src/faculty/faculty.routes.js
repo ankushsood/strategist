@@ -33,7 +33,17 @@
 							}
 			},
 		  })
-		  .state('teacher.standardList', {
+		  .state('teacher.standardCourseSchedulePlan', {
+				url: '/standardCourseSchedulePlan',
+				params : {selectedSubjectId : null},
+				views: {
+				  'detail@teacher' : {
+					  templateUrl: 'src/faculty/standard/courseSchedulePlanner/courseSchedulePlannerTemplate.html',
+					  controller : 'StandardCourseSchedulePlanController',
+					  controllerAs: 'standardCourseSchedulePlanController'
+				  },
+				},
+		  }).state('teacher.standardList', {
 			url: '/standards',
 			views: {
 			  'detail@teacher' : {

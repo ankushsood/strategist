@@ -17,6 +17,7 @@
 		students.$promise.then(function (result) {
 			_this.studentList = result;
 		});
+		
 	}
 	
 	ViewStudentDetailsController.$inject=['$stateParams', 'GetStudentDetailsService' ,'ModalService', '$location', 'CreateStudentTimelineEventService']

@@ -1,7 +1,7 @@
 (function() {
 "use strict";
 
-angular.module('strategist', ['ngResource', '720kb.datepicker', 'login','admin', 'angular.morris-chart', 'faculty' /*, 'ui.select2'*/])
+angular.module('strategist', ['ngResource', '720kb.datepicker', 'login','admin', 'ngTouch', 'angular.morris-chart', 'mwl.calendar', 'ui.bootstrap', 'colorpicker.module', 'faculty' /*, 'ui.select2'*/])
 .config(config)
 .directive("fileinput", [function() {
     return {
@@ -24,17 +24,16 @@ angular.module('strategist', ['ngResource', '720kb.datepicker', 'login','admin',
     }
   }]);
 
-  
-config.$inject = ['$urlRouterProvider', '$httpProvider'];
-function config($urlRouterProvider, $httpProvider) {
+config.$inject = ['$urlRouterProvider', '$httpProvider','$touchProvider'];
+function config($urlRouterProvider, $httpProvider, $touchProvider) {
+
+$touchProvider.ngClickOverrideEnabled(true);
 
 var $cookies;
   angular.injector(['ngCookies']).invoke(['$cookies', function(_$cookies_) {
     $cookies = _$cookies_;
   }]);
-	console.log($cookies)
   $urlRouterProvider.otherwise('/');
-  console.log($httpProvider)
   
   $httpProvider.defaults.headers.common['X-Access-Token'] = $cookies.get('accessToken');
   $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';

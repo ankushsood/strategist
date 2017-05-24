@@ -462,12 +462,6 @@
 
   </div>
 
-  <div id="custom_notifications" class="custom-notifications dsp_none">
-    <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
-    </ul>
-    <div class="clearfix"></div>
-    <div id="notif-group" class="tabbed_notifications"></div>
-  </div>
 
   <script src="js/bootstrap.min.js"></script>
 
@@ -504,13 +498,17 @@
         selectable: true,
         selectHelper: true,
         select: function(start, end, allDay) {
-          $('#fc_create').click();
-
+			console.log('11111111111111111111111111111111133334444444444');
+		  
+		  $('#fc_create').click();
+			console.log('aaaaa');
           started = start;
           ended = end
 
           $(".antosubmit").on("click", function() {
-            var title = $("#title").val();
+            console.log('111111111111111111111111111111111');
+			
+			var title = $("#title").val();
             if (end) {
               ended = end
             }
@@ -536,14 +534,14 @@
         },
         eventClick: function(calEvent, jsEvent, view) {
           //alert(calEvent.title, jsEvent, view);
-
+console.log('11111111111111111111111111111111122222222222222');
           $('#fc_edit').click();
           $('#title2').val(calEvent.title);
           categoryClass = $("#event_type").val();
 
           $(".antosubmit2").on("click", function() {
             calEvent.title = $("#title2").val();
-
+console.log('111111111111111111111111111111111333333333333333');
             calendar.fullCalendar('updateEvent', calEvent);
             $('.antoclose2').click();
           });

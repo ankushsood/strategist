@@ -38,6 +38,7 @@
 	}
 
 	function BookChapterService($resource){
+		
 		var service = this;
 		return $resource('/rest/chapter/:bookId', {bookId:'@bookId'},
 		{

@@ -92,12 +92,12 @@
 		}).then(function(modal) {
 			modal.element.modal();
 			modal.close.then(function(result) {
-				
+				console.log( ' trying to save chapter....{}' , result)
 				var addChapter = {};
 				
 				addChapter.chapterTitle = result.title;
 				addChapter.chapterSummary = result.summary;
-				
+					
 				if(result.chapterId != undefined){
 					addChapter.id = result.chapterId;
 					var saveNewChapter = BookChapterService.updateBookChapter({bookId : bookId}, addChapter);
@@ -111,6 +111,8 @@
 						}
 					});
 				}else{
+				
+					console.log('------------' + bookId)
 					var saveNewChapter = BookChapterService.addBookChapter({bookId : bookId}, addChapter);
 					saveNewChapter.$promise.then(function (chapters){
 						SubjectBookDetailsController.bookChapters = chapters;
@@ -147,6 +149,9 @@
 			}			
 			if(!isValid)
 				return false;
+
+			close(result, 500);
+
 		};
 	}
 	

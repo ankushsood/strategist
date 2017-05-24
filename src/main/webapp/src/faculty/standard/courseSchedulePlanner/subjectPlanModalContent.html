@@ -1,0 +1,130 @@
+	<div class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">			
+
+
+			<div class="modal-header">
+					<button type="button" class="close" ng-click="vm.close(false,{})" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Add New Course Plan Schedule</h4>
+				</div>
+				<form name="addScheduleForm" novalidate> 
+					
+				
+				
+				
+				
+				<div id="wizard" class="form_wizard wizard_horizontal">
+                    <ul class="wizard_steps">
+                      <li>
+                        <a href="#step-1">
+                          <span class="step_no">1</span>
+                          <span class="step_descr"><small>Select Book</small>
+                                        </span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#step-2">
+                          <span class="step_no">2</span>
+                          <span class="step_descr"><small>Select Chapter</small>
+                                        </span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#step-3">
+                          <span class="step_no">3</span>
+                          <span class="step_descr"><small>Select Section</small>
+                                        </span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#step-4">
+                          <span class="step_no">4</span>
+                          <span class="step_descr"><small>Prepare Schedule</small>
+                                        </span>
+                        </a>
+                      </li>
+                    </ul>
+                    <div id="step-1">
+                      
+					  
+						<div class="x_content">
+							</br>					
+							<ul class="list-unstyled">
+								<label class="control-label col-md-5 col-sm-5 col-xs-12" ng-repeat="book in vm.bookList">
+									<span>
+										<a href ng-click="vm.selectedBook('{{book.bookId}}')" ng-class="{'selectedBook': vm.selectedBookIds.indexOf('{{book.bookId}}') > -1}" aria-hidden="true">{{book.bookTitle}}</a>
+									</span>
+								</label>
+							</ul>
+						</div>
+                    </div>
+                    <div id="step-2">
+                      
+					                        <h2 class="StepTitle">Step 2 Content</h2>
+
+                    </div>
+                    <div id="step-3">
+                                            <h2 class="StepTitle">Step 3 Content</h2>
+
+                    </div>
+                    <div id="step-4">
+                      <h2 class="StepTitle">Step 4 Content</h2>
+						{{vm.event}}
+						  <div class="x_content">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Title <span class="required">*</span></label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="text" class="form-control" name = "title" ng-model="vm.event.title">
+								<p ng-show="addQuestionControllerForm.title.$error.required" class="error">Please Enter Chapter Title</p>
+							</div>
+							
+						
+						<input class="form-control" colorpicker type="text" ng-model="vm.event.color.primary">
+						<input class="form-control" colorpicker type="text" ng-model="vm.event.color.secondary">
+						<p class="input-group" style="max-width: 250px">
+							<input type="text" class="form-control" readonly uib-datepicker-popup="dd MMMM yyyy" ng-model="vm.event.startsAt" is-open="vm.event.startOpen" close-text="Close" >
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="vm.toggle($event, 'startOpen', vm.event)">
+									<i class="glyphicon glyphicon-calendar"></i>
+								</button>
+							</span>
+						</p>
+						<div uib-timepicker ng-model="vm.event.startsAt" hour-step="1" minute-step="15" show-meridian="true"></div>
+						<p class="input-group" style="max-width: 250px">
+							<input type="text" class="form-control" readonly uib-datepicker-popup="dd MMMM yyyy" ng-model="vm.event.endsAt" is-open="vm.event.endOpen" close-text="Close">
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="vm.toggle($event, 'endOpen', vm.event)"> 
+									<i class="glyphicon glyphicon-calendar"></i>
+								</button>
+							</span>
+						</p>
+						<div uib-timepicker ng-model="vm.event.endsAt" hour-step="1" minute-step="15" show-meridian="true"> </div>
+						<button class="btn btn-danger" ng-click="vm.events.splice($index, 1)"> Delete </button>
+					</div>
+                    </div>
+
+                  </div>
+				
+				
+				
+				
+				
+				
+				
+				
+				</form>
+</div>			
+
+</div>
+
+				
+<script>
+    $(document).ready(function() {
+      // Smart Wizard
+      $('#wizard').smartWizard({
+       selected: 0
+      });
+
+    });
+</script>				
+
+</div>

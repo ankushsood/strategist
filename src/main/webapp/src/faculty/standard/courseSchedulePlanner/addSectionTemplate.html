@@ -1,0 +1,26 @@
+	<div class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" ng-click="addSectionController.close(false,{})" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Add Section</h4>
+				</div>
+				<form name="addSectionControllerForm" novalidate> 
+					<div class="x_content">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Title <span class="required">*</span></label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<input name = "title" ng-required="true" type="text" data-ng-model="addSectionController.bookDetails.title" class="form-control col-md-8 col-xs-13"/>
+							<p ng-show="addSectionControllerForm.title.$error.required" class="error">Please Enter Section Title</p>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div style='float:right;margin:15px;'>
+						<button class="btn btn-primary"  data-dismiss="modal" aria-hidden="true" ng-disabled="addSectionControllerForm.$invalid" ng-click="addSectionController.close(addSectionControllerForm.$valid, addSectionController.bookDetails)">Add Sections and Questions &nbsp;<span class="glyphicon glyphicon-menu-right" aria-hidden="true" style='top:2px;'></span></button>
+					</div>
+				</form>
+			</div>
+        </div>
+	</div>
+	
+	
+
