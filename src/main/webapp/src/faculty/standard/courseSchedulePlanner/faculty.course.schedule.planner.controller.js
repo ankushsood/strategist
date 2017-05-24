@@ -161,8 +161,8 @@
 		});
 	}
 	
-	CourseSchedulePlannerController.$inject=['close', 'bookList', 'chapterList', 'action', 'event', 'selectedDate', 'calendarConfig']
-	function CourseSchedulePlannerController(close, bookList, chapterList, action, event, selectedDate, calendarConfig){
+	CourseSchedulePlannerController.$inject=['close', 'bookList', 'chapterList', 'action', 'event', 'selectedDate', 'calendarConfig', 'BookChapterService']
+	function CourseSchedulePlannerController(close, bookList, chapterList, action, event, selectedDate, calendarConfig, BookChapterService){
 		
 		
 		
@@ -195,16 +195,24 @@
 		modal.event = event;
 		modal.selectedDate = selectedDate;
 		modal.selectedBookIds = [];
+		modal.selectedBookChapters = [];
 		modal.selectedBook = function(bookId){
 			var elementIndex = modal.selectedBookIds.indexOf(bookId);
 			if(elementIndex == -1){
 				modal.selectedBookIds.push(bookId);
+				var bookChapters = BookChapterService.getBookChapters({bookId : bookId}, function(bookChapters) {
+					return bookChapters;
+				});
+				bookChapters.$promise.then(function (result){
+					modal.selectedBookChapters.push({bookId: bookId, chapterList : result});
+				});
+		
 			}else{
 				modal.selectedBookIds.splice( elementIndex, 1 );
 			}
-			
-			console.log(modal.selectedBookIds);
+			console.log(modal.selectedBookIds)
 		}	
+
 		modal.close = function(isValid, result) {
 		
 		//	if(!isValid)

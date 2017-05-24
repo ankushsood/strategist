@@ -22,7 +22,29 @@ angular.module('strategist', ['ngResource', '720kb.datepicker', 'login','admin',
         });
       }
     }
-  }]);
+  }])
+ .directive('loading',   ['$http' ,function ($http)
+    {
+        return {
+            restrict: 'A',
+            link: function (scope, elm, attrs)
+            {
+                scope.isLoading = function () {
+                    return $http.pendingRequests.length > 0;
+                };
+
+                scope.$watch(scope.isLoading, function (v)
+                {
+                    if(v){
+                        elm.show();
+                    }else{
+                        elm.hide();
+                    }
+                });
+            }
+        };
+
+    }]);
 
 config.$inject = ['$urlRouterProvider', '$httpProvider','$touchProvider'];
 function config($urlRouterProvider, $httpProvider, $touchProvider) {

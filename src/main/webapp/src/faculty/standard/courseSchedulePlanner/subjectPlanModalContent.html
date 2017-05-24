@@ -8,9 +8,6 @@
 					<h4 class="modal-title">Add New Course Plan Schedule</h4>
 				</div>
 				<form name="addScheduleForm" novalidate> 
-					
-				
-				
 				
 				
 				<div id="wizard" class="form_wizard wizard_horizontal">
@@ -32,7 +29,7 @@
                       <li>
                         <a href="#step-3">
                           <span class="step_no">3</span>
-                          <span class="step_descr"><small>Select Section</small>
+                          <span class="step_descr"><small>Schedule Preview</small>
                                         </span>
                         </a>
                       </li>
@@ -56,11 +53,14 @@
 									</span>
 								</label>
 							</ul>
+							
+
 						</div>
                     </div>
                     <div id="step-2">
                       
 					                        <h2 class="StepTitle">Step 2 Content</h2>
+											{{vm.selectedBookChapters}}
 
                     </div>
                     <div id="step-3">
