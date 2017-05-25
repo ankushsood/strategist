@@ -11,7 +11,7 @@
  * http://tech-laboratory.blogspot.com
  */
 
-function SmartWizard(target, options) {
+function SmartWizard(target, options, buttons) {
     this.target       = target;
     this.options      = options;
     this.curStepIdx   = options.selected;
@@ -20,13 +20,12 @@ function SmartWizard(target, options) {
     this.msgBox = $('<div class="msgBox"><div class="content"></div><a href="#" class="close">X</a></div>');
     this.elmStepContainer = $('<div></div>').addClass("stepContainer");
     this.loader = $('<div>Loading</div>').addClass("loader");
-    this.buttons = {
+    this.buttons = buttons;/*{
         next : $('<a>'+options.labelNext+'</a>').attr("href","#").addClass("btn btn-success"),
         previous : $('<a>'+options.labelPrevious+'</a>').attr("href","#").addClass("btn btn-primary"),
         finish  : $('<a>'+options.labelFinish+'</a>').attr("href","#").addClass("btn btn-default")
-    };
-
-    /*
+    };*/
+	/*
      * Private functions
      */
 
@@ -439,12 +438,13 @@ function SmartWizard(target, options) {
     $.fn.smartWizard = function(method) {
         var args = arguments;
         var rv = undefined;
+		
         var allObjs = this.each(function() {
             var wiz = $(this).data('smartWizard');
             if (typeof method == 'object' || ! method || ! wiz) {
                 var options = $.extend({}, $.fn.smartWizard.defaults, method || {});
                 if (! wiz) {
-                    wiz = new SmartWizard($(this), options);
+                    wiz = new SmartWizard($(this), options, args[1]);
                     $(this).data('smartWizard', wiz);
                 }
             } else {

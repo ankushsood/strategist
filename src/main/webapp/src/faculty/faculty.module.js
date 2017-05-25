@@ -6,26 +6,10 @@ angular.module('faculty', ['ui.router',  'ngCookies', 'login.services', 'angular
 })();
 
 
-  alert.$inject=['$uibModal'];
-  function alert($uibModal) {
-
-    function show(action, event, bookList, chapterList) {
-      return $uibModal.open({
-        templateUrl: 'src/faculty/standard/courseSchedulePlanner/subjectPlanModalContent.html',
-        controller: function() {
-          var vm = this;
-          vm.action = action;
-          vm.event = event;
-		  vm.bookList = bookList;
-		  vm.chapterList = chapterList;
-        },
-        controllerAs: 'vm'
-      });
-    }
-
-    return {
-      show: show
-    };
-
-  }
-  
+Array.prototype.removeValue = function(name, value){
+   var array = $.map(this, function(v,i){
+      return v[name] === value ? null : v;
+   });
+   this.length = 0; //clear original array
+   this.push.apply(this, array); //push all elements except the one we want to delete
+}

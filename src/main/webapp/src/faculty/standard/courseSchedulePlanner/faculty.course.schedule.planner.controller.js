@@ -5,8 +5,8 @@
 	.controller('StandardCourseSchedulePlanController', StandardCourseSchedulePlanController)
 	.controller('CourseSchedulePlannerController', CourseSchedulePlannerController);
 	
-	StandardCourseSchedulePlanController.$inject=['$stateParams', '$location', 'SubjectBookService', 'ModalService', 'moment', 'alert', 'calendarConfig']
-	function StandardCourseSchedulePlanController($stateParams, $location, SubjectBookService, ModalService, moment, alert, calendarConfig){
+	StandardCourseSchedulePlanController.$inject=['$stateParams', '$location', 'SubjectBookService', 'ModalService', 'moment', 'calendarConfig']
+	function StandardCourseSchedulePlanController($stateParams, $location, SubjectBookService, ModalService, moment, calendarConfig){
 		var _this = this;
 		
 		
@@ -196,7 +196,7 @@
 		modal.selectedDate = selectedDate;
 		modal.selectedBookIds = [];
 		modal.selectedBookChapters = [];
-		modal.selectedBook = function(bookId){
+		modal.selectedBook = function(bookId, bookTitle){
 			var elementIndex = modal.selectedBookIds.indexOf(bookId);
 			if(elementIndex == -1){
 				modal.selectedBookIds.push(bookId);
@@ -204,15 +204,28 @@
 					return bookChapters;
 				});
 				bookChapters.$promise.then(function (result){
-					modal.selectedBookChapters.push({bookId: bookId, chapterList : result});
+					modal.selectedBookChapters.push({bookTitle: bookTitle, bookId: bookId, chapterList : result});
 				});
 		
 			}else{
 				modal.selectedBookIds.splice( elementIndex, 1 );
+				modal.selectedBookChapters.removeValue('bookId', bookId);
 			}
-			console.log(modal.selectedBookIds)
 		}	
 
+		modal.showHideAccordian = function(total, showAccordian){
+		
+			console.log(showAccordian);
+			for(var i=0;i<total;i++){
+				if($('.panel div#' + i).is(":visible")){
+					$('.panel div#' + i).slideUp();
+				}
+			}
+			if(!$('.panel div#' + showAccordian).is(":visible")){
+					$('.panel div#' + showAccordian).slideDown();
+			}	
+		}
+		
 		modal.close = function(isValid, result) {
 		
 		//	if(!isValid)

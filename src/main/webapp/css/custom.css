@@ -5578,8 +5578,9 @@ tr.angular-ui-tree-empty {
 }
 
 .selectedBook{
-	font-weight:bold;
-	color:#1a0db2 !important;
+	color: #b48484 !important;
+    border: solid 1px #b48484;
+    padding: 5px;
 }
 
 .loading-spiner-holder{

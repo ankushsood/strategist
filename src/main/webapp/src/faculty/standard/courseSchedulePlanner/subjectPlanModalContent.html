@@ -49,7 +49,7 @@
 							<ul class="list-unstyled">
 								<label class="control-label col-md-5 col-sm-5 col-xs-12" ng-repeat="book in vm.bookList">
 									<span>
-										<a href ng-click="vm.selectedBook('{{book.bookId}}')" ng-class="{'selectedBook': vm.selectedBookIds.indexOf('{{book.bookId}}') > -1}" aria-hidden="true">{{book.bookTitle}}</a>
+										<a href ng-click="vm.selectedBook('{{book.bookId}}', '{{book.bookTitle}}')" ng-class="{'selectedBook': vm.selectedBookIds.indexOf('{{book.bookId}}') > -1}" aria-hidden="true">{{book.bookTitle}}</a>
 									</span>
 								</label>
 							</ul>
@@ -58,9 +58,33 @@
 						</div>
                     </div>
                     <div id="step-2">
-                      
-					                        <h2 class="StepTitle">Step 2 Content</h2>
-											{{vm.selectedBookChapters}}
+						<h2 class="StepTitle">Step 2 Content</h2>
+						<div class="accordion" ng-repeat="book in vm.selectedBookChapters" id="{{book.bookId}}" role="tablist" aria-multiselectable="true">
+							{{book.bookTitle}}
+							<div class="panel" ng-repeat="chapter in book.chapterList">
+								<div class='panel-heading'>
+									<a class="collapsed" role="tab" id="{{chapter.title}}"  href 
+									ng-click="vm.showHideAccordian(book.chapterList.length, $index)" 
+									data-toggle="collapse" data-parent="#{{book.bookId}}" aria-expanded="false" aria-controls="{{chapter.title}}">
+										<h4 style='display:inline-block;word-break: break-word !important;word-wrap: break-word !important;width: 40%;' class="panel-title">{{chapter.title}}</h4>
+									</a>
+								</div>
+								<div id="{{$index}}" class="panel-collapse collapse in" style='display:none;' role="tabpanel" aria-labelledby="{{chapter.title}}">
+									<div class="panel-body">
+										{{chapter.summary}}
+										<!--<div class="row">
+											<div class="col-xl-12">
+												<div ui-tree id="tree-root" data-nodrop-enabled="true" ng-if="subBookDetCtrl.data[chapter.chapterId].length > 0">
+													<ol ui-tree-nodes ng-model="subBookDetCtrl.data[chapter.chapterId]">
+														<li ng-if="subBookDetCtrl.data[chapter.chapterId].length > 0" ng-repeat="node in subBookDetCtrl.data[chapter.chapterId] track by $index" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+													</ol>
+												</div>
+											</div>
+										</div>-->
+									</div>
+								</div>
+							</div>
+						</div>
 
                     </div>
                     <div id="step-3">
@@ -122,7 +146,11 @@
       // Smart Wizard
       $('#wizard').smartWizard({
        selected: 0
-      });
+      },{
+        next : $('<a>Next</a>').attr("href","#").addClass("btn btn-success"),
+        previous : $('<a>Previous</a>').attr("href","#").addClass("btn btn-primary"),
+        finish  : $('<a>Finish</a>').attr("href","#").addClass("btn btn-default")
+    });
 
     });
 </script>				
