@@ -5,6 +5,11 @@
 				<div class="compose-btn">
 					<p>{{subBookDetCtrl.selectedBookTitle}} Chapter Summary</p> 
 					<button data-placement="top" type="button" class="btn btn-info btn-sm" ng-click="subBookDetCtrl.ShowAddChapterModal(subBookDetCtrl.BookChapterService, subBookDetCtrl.ModalService, subBookDetCtrl.selectedBookId, subBookDetCtrl, {})"> Add Chapter</button>
+				
+				
+					<button ng-class="{'subjectBookHideOnResize': subBookController.showChapters}" ng-click="subBookController.showBookSelection()" 
+					data-placement="top" type="button" 
+					class="subjectBookShowOnResize btn btn-info btn-sm">Select Different Book</button>
 				</div>
 			</div>
 			<div class="clearfix"/>

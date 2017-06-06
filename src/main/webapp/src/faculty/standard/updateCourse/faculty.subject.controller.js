@@ -1,6 +1,7 @@
 (function() {
 'use strict';
 
+
 	angular.module('faculty').filter('decode', function() {
         return function(input) {
 			var str = input.split('_');
@@ -17,6 +18,7 @@
 	SubjectBookDetailsController.$inject=['$stateParams', 'BookChapterService', '$location', 'ModalService']
 	function SubjectBookDetailsController($stateParams, BookChapterService, $location, ModalService){
 		var _this = this;
+		
 		
 		_this.selectedBookTitle = $stateParams.selectedBookTitle;
 		_this.selectedBookId = $stateParams.selectedBookId;
@@ -299,10 +301,15 @@
 		
 	}
 	
-	SubjectBookController.$inject=['$stateParams', 'SubjectBookService', '$location', 'ModalService']
-	function SubjectBookController($stateParams, SubjectBookService, $location, ModalService){
+	SubjectBookController.$inject=['$stateParams', 'SubjectBookService', '$location', 'ModalService', '$scope']
+	function SubjectBookController($stateParams, SubjectBookService, $location, ModalService, $scope){
 		var _this = this;
 		_this.subjectData = {} 
+		
+		
+		console.log('----------------');
+		console.log($scope);
+		
 		if($stateParams.selectedSubjectId == undefined || $stateParams.selectedSubjectId == null){
 			$location.url("/home/standards");
 			return;
@@ -321,6 +328,13 @@
 		_this.showAddBookModal = ShowAddBookModal;
 		_this.modalViewService = ModalService;
 		_this.subjectBookService = SubjectBookService;
+		_this.show=false;
+		_this.showBookSelection = function (){
+			$('#bookListDiv').show();
+			$('#selectedBookDetails').html('No Chapter Selected');
+			$('#selectedBookDetails').hide();
+
+		}
 	}
 	
 	function ShowAddBookModal(selectedSubject, SubjectBookService, ModalService, subjectId, SubjectBookController){

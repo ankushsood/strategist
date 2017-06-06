@@ -1834,7 +1834,7 @@ a.star {
   margin-right: 0;
 }
 .mail_list_column {
-  border-left: 1px solid #DBDBDB;
+/*  border-left: 1px solid #DBDBDB;*/
 }
 .mail_view {
   border-left: 1px solid #DBDBDB
@@ -5439,17 +5439,19 @@ ul.notifications {
 background-color:#fff !important;
 }
 
-@media only screen and (max-width: 770px) {
-    .subjectBookHideOnResize {
+.subjectBookHideOnResize {
         display: none;
-    }
+}
+
+
+@media only screen and (max-width: 770px) {
 	
 	.subjectBookShowOnResize {
         display: block;
     }
 }
 
-@media only screen and (min-width: 770px) {
+@media only screen and (min-width: 992px) {
     .subjectBookShowOnResize {
         display:none;
     }
@@ -5579,10 +5581,12 @@ tr.angular-ui-tree-empty {
 
 .selectedBook{
 	color: #b48484 !important;
-    border: solid 1px #b48484;
-    padding: 5px;
+    padding: 0;
 }
 
+.no-padding{
+padding:0 !important;
+}
 .loading-spiner-holder{
 	
 	
@@ -5595,7 +5599,7 @@ tr.angular-ui-tree-empty {
 	z-index:1000000 !important;
 	background-color: #fff;
 	filter: alpha(opacity=50);
-	opacity: .5;
+	opacity: .2;
 	height: 100%;
 	width: 100%;
 	text-align: center;

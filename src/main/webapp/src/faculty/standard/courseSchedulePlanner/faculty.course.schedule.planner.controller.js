@@ -144,6 +144,7 @@
 			templateUrl: 'src/faculty/standard/courseSchedulePlanner/subjectPlanModalContent.html',
 			controller: "CourseSchedulePlannerController",
 			controllerAs: 'vm',
+			bodyClass: 'no-padding',
 			inputs: {bookList: bookList, chapterList: chapterList, action: action, event: event, selectedDate: selectedDate}
 			
 		}).then(function(modal) {
@@ -153,7 +154,7 @@
 			});
 			modal.close.then(function(result) {
 				console.log('aaaaaaaaaaadffdf22222222222');
-				
+					
 				//$(".modal-backdrop").remove();
 				//$("body").removeClass("modal-open");
 				//ModalService.closeModals();
@@ -213,17 +214,16 @@
 			}
 		}	
 
-		modal.showHideAccordian = function(total, showAccordian){
-		
-			console.log(showAccordian);
-			for(var i=0;i<total;i++){
-				if($('.panel div#' + i).is(":visible")){
-					$('.panel div#' + i).slideUp();
+		modal.showHideAccordian = function(chapterList, chapterId){
+			for(var i=0;i<chapterList.length;i++){
+				if($('.panel div#' + chapterList[i].chapterId).is(":visible")){
+					$('.panel div#' + chapterList[i].chapterId).slideUp();
 				}
 			}
-			if(!$('.panel div#' + showAccordian).is(":visible")){
-					$('.panel div#' + showAccordian).slideDown();
-			}	
+
+			if(!$('.panel div#' + chapterId).is(":visible")){
+					$('.panel div#' + chapterId).slideDown();
+			}
 		}
 		
 		modal.close = function(isValid, result) {
@@ -232,8 +232,11 @@
 		//		return false;
 			$(".modal").remove;
 			$(".modal-backdrop").remove();
-			$("body").removeClass("modal-open");
+			//$("body").style('padding', '0');
+			console.log('aaaaaaaaaaaaaaaa');
 			close(result);
+			
+			
 		};
 	
 	}

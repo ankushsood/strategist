@@ -64,12 +64,12 @@
 							<div class="panel" ng-repeat="chapter in book.chapterList">
 								<div class='panel-heading'>
 									<a class="collapsed" role="tab" id="{{chapter.title}}"  href 
-									ng-click="vm.showHideAccordian(book.chapterList.length, $index)" 
-									data-toggle="collapse" data-parent="#{{book.bookId}}" aria-expanded="false" aria-controls="{{chapter.title}}">
-										<h4 style='display:inline-block;word-break: break-word !important;word-wrap: break-word !important;width: 40%;' class="panel-title">{{chapter.title}}</h4>
+									ng-click="vm.showHideAccordian(book.chapterList, chapter.chapterId)" 
+									data-toggle="collapse" data-parent="#{{chapter.bookId}}" aria-expanded="false" aria-controls="{{chapter.title}}">
+										<h4 style='display:inline-block;word-break: break-word !important;word-wrap: break-word !important;width: 100%;' class="panel-title">{{chapter.title}}</h4>
 									</a>
 								</div>
-								<div id="{{$index}}" class="panel-collapse collapse in" style='display:none;' role="tabpanel" aria-labelledby="{{chapter.title}}">
+								<div id="{{chapter.chapterId}}" class="panel-collapse collapse in" style='display:none;' role="tabpanel" aria-labelledby="{{chapter.title}}">
 									<div class="panel-body">
 										{{chapter.summary}}
 										<!--<div class="row">

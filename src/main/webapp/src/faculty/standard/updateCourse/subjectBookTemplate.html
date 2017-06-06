@@ -1,17 +1,16 @@
-<div class="row">
+<div class="row"  ng-style="style()" resize>
     <div class="x_panel">
         <div class="x_content">
             <div class="title_left">
                 <h3>{{subBookController.subjectTitle}}</h3>
                     <button data-placement="top" type="button" ng-click="subBookController.showAddBookModal(subBookController.subjectTitle, subBookController.subjectBookService, subBookController.modalViewService, subBookController.subjectId, subBookController)" class="subjectBookHideOnResize btn btn-info btn-sm" ng-show="true">Add New Book</button>
 					
-					<button ng-click="subBookController.showBookSelection;" data-placement="top" type="button" class="subjectBookShowOnResize btn btn-info btn-sm">Select Different Book</button>
 					
 			</div>
             <br/>
             <div class="clearfix"></div>
-            <div class="row">
-                <div class=" subjectBookHideOnResize col-md-3 col-sm-12 col-xs-12 mail_list_column" ng-hide="subBookController.showBooks">
+            <div class="row" >
+                <div id='bookListDiv' ng-class="{'subjectBookHideOnResize': subBookController.show}" class="col-md-3 col-sm-12 col-xs-12 mail_list_column">
                     <div ng-repeat=" book in subBookController.subjectBooks" class="mail_list">
                         <div class="right">
 							<h3>

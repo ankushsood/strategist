@@ -172,7 +172,9 @@
 	
 	          //  Resolve the 'close' promise.
 	          closeDeferred.resolve(result);
-	
+				//Added to remove extra right padding from body
+				body[0].style.cssText = '';
+				body[0].classList.remove('modal-open');
 	          //  Remove the custom class from the body
 	          if (options.bodyClass) {
 	            body[0].classList.remove(options.bodyClass);
@@ -186,6 +188,7 @@
 	            //  We can now clean up the scope
 	            modalScope.$destroy();
 	
+				
 	            //  Unless we null out all of these objects we seem to suffer
 	            //  from memory leaks, if anyone can explain why then I'd
 	            //  be very interested to know.

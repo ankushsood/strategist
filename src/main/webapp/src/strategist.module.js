@@ -3,6 +3,36 @@
 
 angular.module('strategist', ['ngResource', '720kb.datepicker', 'login','admin', 'ngTouch', 'angular.morris-chart', 'mwl.calendar', 'ui.bootstrap', 'colorpicker.module', 'faculty' /*, 'ui.select2'*/])
 .config(config)
+.directive('resize', ['$window', function ($window) {
+    return function (scope, element) {
+        var w = angular.element($window);
+        scope.getWindowDimensions = function () {
+            return {
+                'h': w.height(),
+                'w': w.width()
+            };
+        };
+        scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
+            scope.windowHeight = newValue.h;
+            scope.windowWidth = newValue.w;
+
+            scope.style = function () {
+				if(jQuery('#selectedBookDetails').html().trim()!== 'No Chapter Selected' && newValue.w <= 991){
+						$('#bookListDiv').hide();
+					}else{
+						$('#bookListDiv').show();
+				}
+				return {
+                };
+            };
+
+        }, true);
+
+        w.bind('resize', function () {
+            scope.$apply();
+        });
+    }
+}])
 .directive("fileinput", [function() {
     return {
       scope: {
@@ -46,8 +76,12 @@ angular.module('strategist', ['ngResource', '720kb.datepicker', 'login','admin',
 
     }]);
 
+	
+	
 config.$inject = ['$urlRouterProvider', '$httpProvider','$touchProvider'];
 function config($urlRouterProvider, $httpProvider, $touchProvider) {
+
+
 
 $touchProvider.ngClickOverrideEnabled(true);
 
